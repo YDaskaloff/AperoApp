@@ -46,7 +46,7 @@ namespace AperoApp.API.Controllers
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)
-        {
+        {            
             var userFromRepo = await repo.Login(userForLoginDto.Username.ToLower(), userForLoginDto.Password);
 
             if (userFromRepo == null)
@@ -56,7 +56,7 @@ namespace AperoApp.API.Controllers
         }
 
         private IActionResult BuildToken(User userFromRepo)
-        {
+        {            
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
