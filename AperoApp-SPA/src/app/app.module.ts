@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-import { BikesComponent } from './bikes/bikes.component';
+import { BikesComponent } from './bikes-root/bikes/bikes.component';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
 import { appRoutes } from './routes';
@@ -17,6 +17,9 @@ import { ContactComponent } from './contact/contact.component';
 import { AuthService } from './_services/auth.service';
 import { RegisterComponent } from './register/register.component';
 import { ErrorInterceptorProvider } from './_services/error.interceptor';
+import { MembersEditComponent } from './members/members-edit/members-edit.component';
+import { BikesEditComponent } from './bikes-root/bikes-edit/bikes-edit.component';
+import { BikeEditComponent } from './bikes-root/bike-edit/bike-edit.component';
 
 @NgModule({
    declarations: [
@@ -28,7 +31,10 @@ import { ErrorInterceptorProvider } from './_services/error.interceptor';
       AboutComponent,
       FaqComponent,
       ContactComponent,
-      RegisterComponent
+      RegisterComponent,
+      MembersEditComponent,
+      BikesEditComponent,
+      BikeEditComponent
    ],
    imports: [
       BrowserModule,

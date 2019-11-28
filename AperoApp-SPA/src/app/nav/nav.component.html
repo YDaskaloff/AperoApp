@@ -30,7 +30,9 @@
       <div class="dropdown-menu mt-3" *dropdownMenu>
         <a class="dropdown-item" [routerLink]="['/register']"> <i class="fa fa-user-plus"></i> Register</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#"> <i class="fa fa-users"></i> Members</a>
+        <a class="dropdown-item" [routerLink]="['/members']"> <i class="fa fa-users"></i> Edit members</a>
+        <div class="dropdown-divider"></div>
+        <a class="dropdown-item" [routerLink]="['/bikes-edit']"> <i class="fa fa-bicycle"></i> Edit bikes</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
       </div>
