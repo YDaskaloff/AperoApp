@@ -6,6 +6,21 @@
     padding: 2px !important;
 }
 
-.nav-link, .dropdown-toggle:hover {
+ .nav-link, .dropdown-toggle {
+    color: #fff !important;
     cursor: pointer;
 }
+
+.dropdown-toggle:hover, .nav-link:hover {
+    color: #20c997 !important;
+} 
+
+.dropdown-item {
+    cursor: pointer;
+    color: #323030 !important;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    color: #fff !important;
+  }
+  

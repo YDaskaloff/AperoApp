@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
+import { Router } from '@angular/router';
+import { AlertifyService } from '../_services/alertify.service';
 
 @Component({
   selector: 'app-register',
@@ -8,27 +10,30 @@ import { AuthService } from '../_services/auth.service';
 })
 export class RegisterComponent implements OnInit {
   model: any = {};
+  previousUrl: string = this.authService.getPreviousUrl();
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) { }
 
   ngOnInit() {
   }
 
   register() {
     this.authService.register(this.model).subscribe(() => {
-      console.log('registration successful');
+      this.alertify.success('registration successful');
+      this.router.navigateByUrl('/home');
     }, error => {
-      console.log(error);
+      this.alertify.error(error);
     });
   }
 
   cancel() {
     const previous = this.authService.getPreviousUrl();
+    this.alertify.message('cancelled');
 
     if (previous && previous !== '/login') {
-      this.authService.router.navigateByUrl(previous);
+      this.router.navigateByUrl(this.previousUrl);
     } else {
-      this.authService.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/home');
     }
   }
 }
