@@ -1,0 +1,32 @@
+[
+    {
+      "Username": "Weaver",
+      "Password": "password",
+      "RoleId": 1
+    },
+    {
+      "Username": "Newton",
+      "Password": "password",
+      "RoleId": 2
+    },
+    {
+      "Username": "Pace",
+      "Password": "password",
+      "RoleId": 3
+    },
+    {
+      "Username": "Callie",
+      "Password": "password",
+      "RoleId": 1
+    },
+    {
+      "Username": "Cathryn",
+      "Password": "password",
+      "RoleId": 2
+    },
+    {
+      "Username": "Becky",
+      "Password": "password",
+      "RoleId": 3
+    }
+]

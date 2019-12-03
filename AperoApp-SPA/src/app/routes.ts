@@ -32,10 +32,6 @@ export const appRoutes: Routes = [
             { path: 'bike-edit', component: BikeEditComponent },
         ]
     },
-    { path: 'register', component: RegisterComponent },
-    { path: 'members', component: MembersEditComponent },
-    { path: 'bikes-edit', component: BikesEditComponent },
-    { path: 'bike-edit', component: BikeEditComponent },
     // default destination if nothing above matches the request:
     { path: '**', redirectTo: '', pathMatch: 'full' },
 ];
