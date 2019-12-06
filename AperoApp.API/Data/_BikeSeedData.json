@@ -1,0 +1,38 @@
+[
+    {
+      "Id": 1,
+      "Brand": "lion",
+      "Model": "lioness",
+      "Name": "lyra",
+      "Gears": 12,
+      "Color": "white",
+      "WheelSize": 27,
+      "Weight": 10,
+      "Type": "city",
+      "Basket": 1,
+      "Description": "Some description",
+      "Sex": "uni",
+      "BikerHeight": 166,
+      "GearType": "internal",
+      "BreakType": "pads",
+      "LuggageRack": 1
+    },
+    {
+      "Id": 2,
+      "Brand": "tiger",
+      "Model": "tigress",
+      "Name": "boba",
+      "Gears": 6,
+      "Color": "black",
+      "WheelSize": 27,
+      "Weight": 12,
+      "Type": "city",
+      "Basket": 1,
+      "Description": "Some description",
+      "Sex": "uni",
+      "BikerHeight": 166,
+      "GearType": "shifter",
+      "BreakType": "discs",
+      "LuggageRack": 1
+    }
+   ]

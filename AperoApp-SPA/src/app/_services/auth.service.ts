@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { map, filter, pairwise } from 'rxjs/operators';
 import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -8,7 +8,7 @@ import { JwtHelperService } from '@auth0/angular-jwt';
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/auth/';
+  baseUrl = 'http://localhost:5000/api/admin/auth/';
   private previousUrl: string;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
@@ -37,6 +37,7 @@ export class AuthService {
       })
     );
   }
+
 
   register(model: any) {
     return this.http.post(this.baseUrl + 'register', model);

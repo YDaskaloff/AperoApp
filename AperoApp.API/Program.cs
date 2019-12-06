@@ -22,6 +22,8 @@ namespace AperoApp.API
                     context.Database.Migrate();
                     Seed.SeedUsers(context);
                     Seed.SeedRoles(context);
+                    Seed.SeedBikes(context);
+                    Seed.SeedPhotos(context);
                 }
                 catch (Exception ex)
                 {

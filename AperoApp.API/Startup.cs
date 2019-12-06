@@ -2,6 +2,7 @@ using System.Net;
 using System.Text;
 using AperoApp.API.Data;
 using AperoApp.API.Helpers;
+using AutoMapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -29,9 +30,17 @@ namespace AperoApp.API
         {
             services.AddDbContext<DataContext>(x => x.UseSqlite
                 (Configuration.GetConnectionString("DefaultConnection")));
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(opt =>
+            {
+                opt.SerializerSettings.ReferenceLoopHandling = 
+                Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+            });
             services.AddCors();
-            services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddAutoMapper(typeof(UserRepository).Assembly);
+            services.AddAutoMapper(typeof(BikeRepository).Assembly);
+            services.AddScoped<IAuthRepository, AuthRepository>(); 
+            services.AddScoped<IBikeRepository, BikeRepository>();  
+            services.AddScoped<IUserRepository, UserRepository>();         
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

@@ -1,21 +1,36 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AperoApp.API.Migrations
 {
-    public partial class BikesPhotosRoles : Migration
+    public partial class BikesUsersRoles : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Values");
+
             migrationBuilder.RenameColumn(
                 name: "UserName",
                 table: "Users",
                 newName: "Username");
 
-            migrationBuilder.AddColumn<int>(
-                name: "RoleId",
+            migrationBuilder.AddColumn<DateTime>(
+                name: "Created",
                 table: "Users",
                 nullable: false,
-                defaultValue: 0);
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<DateTime>(
+                name: "LastActive",
+                table: "Users",
+                nullable: false,
+                defaultValue: new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified));
+
+            migrationBuilder.AddColumn<string>(
+                name: "Role",
+                table: "Users",
+                nullable: true);
 
             migrationBuilder.CreateTable(
                 name: "Bikes",
@@ -34,7 +49,11 @@ namespace AperoApp.API.Migrations
                     Basket = table.Column<bool>(nullable: false),
                     Description = table.Column<string>(nullable: true),
                     Sex = table.Column<string>(nullable: true),
-                    BikerHeight = table.Column<int>(nullable: false)
+                    BikerHeight = table.Column<int>(nullable: false),
+                    DateAdded = table.Column<DateTime>(nullable: false),
+                    GearType = table.Column<string>(nullable: true),
+                    BreakType = table.Column<string>(nullable: true),
+                    LuggageRack = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -94,13 +113,34 @@ namespace AperoApp.API.Migrations
                 name: "Bikes");
 
             migrationBuilder.DropColumn(
-                name: "RoleId",
+                name: "Created",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "LastActive",
+                table: "Users");
+
+            migrationBuilder.DropColumn(
+                name: "Role",
                 table: "Users");
 
             migrationBuilder.RenameColumn(
                 name: "Username",
                 table: "Users",
                 newName: "UserName");
+
+            migrationBuilder.CreateTable(
+                name: "Values",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    Name = table.Column<string>(type: "TEXT", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Values", x => x.Id);
+                });
         }
     }
 }

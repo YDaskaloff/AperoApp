@@ -31,13 +31,25 @@ namespace AperoApp.API.Migrations
                     b.Property<string>("Brand")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("BreakType")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Color")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
 
+                    b.Property<string>("GearType")
+                        .HasColumnType("TEXT");
+
                     b.Property<int>("Gears")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<bool>("LuggageRack")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Model")
@@ -108,14 +120,20 @@ namespace AperoApp.API.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("LastActive")
+                        .HasColumnType("TEXT");
+
                     b.Property<byte[]>("PasswordHash")
                         .HasColumnType("BLOB");
 
                     b.Property<byte[]>("PasswordSalt")
                         .HasColumnType("BLOB");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("INTEGER");
+                    b.Property<string>("Role")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Username")
                         .HasColumnType("TEXT");
@@ -123,20 +141,6 @@ namespace AperoApp.API.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("AperoApp.API.Models.Value", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Values");
                 });
 
             modelBuilder.Entity("AperoApp.API.Models.Photo", b =>

@@ -28,8 +28,8 @@ export const appRoutes: Routes = [
         children: [
             { path: 'register', component: RegisterComponent },
             { path: 'members', component: MembersEditComponent },
-            { path: 'bikes-edit', component: BikesEditComponent },
-            { path: 'bike-edit', component: BikeEditComponent },
+            { path: 'edit-bikes', component: BikesEditComponent },
+            { path: 'edit-bike', component: BikeEditComponent },
         ]
     },
     // default destination if nothing above matches the request:

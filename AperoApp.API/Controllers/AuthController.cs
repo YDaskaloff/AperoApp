@@ -5,14 +5,16 @@ using System.Text;
 using System.Threading.Tasks;
 using AperoApp.API.Data;
 using AperoApp.API.Dtos;
+using AperoApp.API.Helpers;
 using AperoApp.API.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
 namespace AperoApp.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/admin/[controller]")]
     [ApiController]
     public class AuthController : ControllerBase
     {
@@ -24,11 +26,10 @@ namespace AperoApp.API.Controllers
             repo = _repo;
         }
 
+        [AuthorizeRoles(Roles.Admin)]
         [HttpPost("register")]
         public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
         {
-            // validate request
-
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
             if (await repo.UserExists(userForRegisterDto.Username))
@@ -60,7 +61,8 @@ namespace AperoApp.API.Controllers
             var claims = new[]
             {
                 new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
-                new Claim(ClaimTypes.Name, userFromRepo.Username)
+                new Claim(ClaimTypes.Name, userFromRepo.Username),
+                new Claim(ClaimTypes.Role, userFromRepo.Role)
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config

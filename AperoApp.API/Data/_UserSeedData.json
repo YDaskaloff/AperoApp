@@ -1,32 +1,32 @@
 [
     {
-      "Username": "Weaver",
+      "Username": "John",
       "Password": "password",
-      "RoleId": 1
+      "Role": "admin"
     },
     {
-      "Username": "Newton",
+      "Username": "Bob",
       "Password": "password",
-      "RoleId": 2
+      "Role": "moderator"
     },
     {
-      "Username": "Pace",
+      "Username": "Mike",
       "Password": "password",
-      "RoleId": 3
+      "Role": "member"
     },
     {
-      "Username": "Callie",
+      "Username": "Vicky",
       "Password": "password",
-      "RoleId": 1
+      "Role": "admin"
     },
     {
-      "Username": "Cathryn",
+      "Username": "Cathy",
       "Password": "password",
-      "RoleId": 2
+      "Role": "moderator"
     },
     {
       "Username": "Becky",
       "Password": "password",
-      "RoleId": 3
+      "Role": "member"
     }
 ]

@@ -16,11 +16,15 @@ namespace AperoApp.API.Data
         public async Task<User> Login(string username, string password)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
+            var role = await context.Roles.FirstOrDefaultAsync(x => x.RoleName == user.Role);
 
             if (user == null)
                 return null;
             
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) 
+                return null;
+            
+            if (role == null)
                 return null;
 
             return user;

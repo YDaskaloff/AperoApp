@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using AperoApp.API.Models;
@@ -11,7 +12,7 @@ namespace AperoApp.API.Data
         {
             if (!context.Users.Any()) 
             {
-                var userData = System.IO.File.ReadAllText("Data/UserSeedData.json");
+                var userData = System.IO.File.ReadAllText("Data/_UserSeedData.json");
                 var users = JsonConvert.DeserializeObject<List<User>>(userData);
 
                 foreach (var user in users) 
@@ -29,11 +30,43 @@ namespace AperoApp.API.Data
             }
         }
 
+        internal static void SeedPhotos(DataContext context)
+        {
+            if (!context.Photos.Any())
+            {
+                var photoData = System.IO.File.ReadAllText("Data/_PhotoSeedData.json");
+                var photos = JsonConvert.DeserializeObject<List<Photo>>(photoData);
+
+                foreach (var bike in photos) 
+                {                    
+                    context.Photos.Add(bike);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
+        internal static void SeedBikes(DataContext context)
+        {
+            if (!context.Bikes.Any())
+            {
+                var bikeData = System.IO.File.ReadAllText("Data/_BikeSeedData.json");
+                var bikes = JsonConvert.DeserializeObject<List<Bike>>(bikeData);
+
+                foreach (var bike in bikes) 
+                {                    
+                    context.Bikes.Add(bike);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         public static void SeedRoles(DataContext context)
         {
             if (!context.Roles.Any())
             {
-                var roleData = System.IO.File.ReadAllText("Data/RoleSeedData.json");
+                var roleData = System.IO.File.ReadAllText("Data/_RoleSeedData.json");
                 var roles = JsonConvert.DeserializeObject<List<Role>>(roleData);
 
                 foreach (var role in roles) 
