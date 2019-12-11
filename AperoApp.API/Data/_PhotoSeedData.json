@@ -12,5 +12,12 @@
       "Description": "A black bike",
       "IsMain": 1,
       "BikeId": 2
+    },
+    {
+      "Id": 3,
+      "Url": "https://res.cloudinary.com/dnxuhi8wr/image/upload/v1575729293/AperoApp/A103_01-min_rkluzi.jpg",
+      "Description": "A black bike",
+      "IsMain": 1,
+      "BikeId": 3
     }
    ]

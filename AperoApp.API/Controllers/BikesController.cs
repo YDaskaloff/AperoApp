@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AperoApp.API.Controllers
 {
+    [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]
     public class BikesController : ControllerBase
@@ -40,8 +41,6 @@ namespace AperoApp.API.Controllers
             var bikeToReturn = mapper.Map<BikeForDetailedDto>(bike);
 
             return Ok(bikeToReturn);
-        }
-
-        
+        }        
     }
 }

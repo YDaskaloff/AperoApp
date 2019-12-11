@@ -40,7 +40,8 @@ namespace AperoApp.API
             services.AddAutoMapper(typeof(BikeRepository).Assembly);
             services.AddScoped<IAuthRepository, AuthRepository>(); 
             services.AddScoped<IBikeRepository, BikeRepository>();  
-            services.AddScoped<IUserRepository, UserRepository>();         
+            services.AddScoped<IUserRepository, UserRepository>();  
+            services.AddScoped<IRoleRepository, RoleRepository>();       
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters

@@ -34,5 +34,23 @@
       "GearType": "shifter",
       "BreakType": "discs",
       "LuggageRack": 1
+    },
+    {
+      "Id": 3,
+      "Brand": "rambo",
+      "Model": "first-blood",
+      "Name": "john",
+      "Gears": 6,
+      "Color": "white",
+      "WheelSize": 27,
+      "Weight": 12,
+      "Type": "city",
+      "Basket": 1,
+      "Description": "Some description",
+      "Sex": "uni",
+      "BikerHeight": 166,
+      "GearType": "shifter",
+      "BreakType": "discs",
+      "LuggageRack": 1
     }
    ]

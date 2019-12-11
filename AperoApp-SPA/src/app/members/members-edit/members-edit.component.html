@@ -1,3 +1,51 @@
-<p>
-  members-edit works!
-</p>
+<div class="container">
+  <form #changeRoleForm="ngForm" (ngSubmit)="changeRole()">
+    <div class="card mt-4">
+      <div class="row">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <h3 class="text-center mt-3 mb-3">Change a member's role</h3>
+            <hr>
+        </div>      
+      </div>
+      <div class="row" style="padding-left: 50px; padding-bottom: 20px;">
+        <div class="col-4">
+          <select class="form-control" style="padding-right: 5px;" name="username" required [(ngModel)]="model.username">
+            <option [ngValue]="undefined" hidden selected>Choose a user...</option>
+            <option *ngFor="let user of users" >{{user.username}}</option>
+          </select>
+        </div>
+        <div class="col-4">
+          <select class="form-control" style="padding-right: 5px;" name="role" required [(ngModel)]="model.role">
+            <option [ngValue]="undefined" hidden selected>Choose a role...</option>
+            <option *ngFor="let role of roles">{{role.roleName}}</option>
+          </select>
+        </div>
+        <div class="col-1"></div>
+        <div class="col-2">
+          <button class="btn btn-primary" type="submit" [disabled]="!changeRoleForm.valid">Change role</button>
+        </div>
+      </div>      
+    </div>    
+  </form>
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Member:</th>
+        <th scope="col">Role:</th>
+        <th scope="col">Last active:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <th scope="row">{{user.id}}</th>
+        <td>{{user.username | titlecase}}</td>
+        <td>{{user.role}}</td>
+        <td>{{user.lastActive | date}}</td>
+        <td><button class="btn btn-danger" type="button" (click)="deleteUser(user.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table> 
+</div>

@@ -31,5 +31,4 @@ constructor() { }
   message(message: string) {
     alertify.message(message);
   }
-
 }

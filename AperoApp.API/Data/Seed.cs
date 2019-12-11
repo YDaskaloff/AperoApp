@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using AperoApp.API.Helpers;
 using AperoApp.API.Models;
 using Newtonsoft.Json;
 
@@ -66,12 +67,17 @@ namespace AperoApp.API.Data
         {
             if (!context.Roles.Any())
             {
-                var roleData = System.IO.File.ReadAllText("Data/_RoleSeedData.json");
-                var roles = JsonConvert.DeserializeObject<List<Role>>(roleData);
+                Dictionary<int, string> RolesToSeed = new Dictionary<int, string>();
+                RolesToSeed.Add(1, Roles.Admin);
+                RolesToSeed.Add(2, Roles.Moderator);
 
-                foreach (var role in roles) 
-                {                    
-                    context.Roles.Add(role);
+                foreach (var role in RolesToSeed) 
+                {         
+                    Role roleToSeed = new Role {
+                        Id = role.Key,
+                        RoleName = role.Value,
+                    };
+                    context.Roles.Add(roleToSeed);
                 }
 
                 context.SaveChanges();

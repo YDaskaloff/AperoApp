@@ -1,0 +1,22 @@
+<div class="container">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Img:</th>
+        <th scope="col">Name:</th>
+        <th scope="col">Date added:</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bike of bikes">
+        <th scope="row">{{bike.id}}</th>
+        <td><img src="{{bike.photoUrl}}" alt="{{bike.name | titlecase}}"></td>
+        <td>{{bike.name | titlecase}}</td>
+        <td>{{bike.dateAdded | date}}</td>
+        <td><button class="btn btn-success" type="button" (click)="goToEditBike(bike.id)">Edit</button></td>
+        <td><button class="btn btn-danger" type="button" (click)="deleteBike(bike.id)">Delete</button></td>
+      </tr>
+    </tbody>
+  </table> 
+</div>

@@ -7,7 +7,6 @@ using AperoApp.API.Data;
 using AperoApp.API.Dtos;
 using AperoApp.API.Helpers;
 using AperoApp.API.Models;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -26,24 +25,7 @@ namespace AperoApp.API.Controllers
             repo = _repo;
         }
 
-        [AuthorizeRoles(Roles.Admin)]
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(UserForRegisterDto userForRegisterDto)
-        {
-            userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
-
-            if (await repo.UserExists(userForRegisterDto.Username))
-                return BadRequest("Username already exists");
-
-            var userToCreate = new User
-            {
-                Username = userForRegisterDto.Username
-            };
-
-            var createdUser = await repo.Register(userToCreate, userForRegisterDto.Password);
-
-            return StatusCode(201);
-        }
+      
 
         [HttpPost("login")]
         public async Task<IActionResult> Login(UserForLoginDto userForLoginDto)

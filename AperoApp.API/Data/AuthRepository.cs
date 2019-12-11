@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using AperoApp.API.Helpers;
 using AperoApp.API.Models;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,7 +17,7 @@ namespace AperoApp.API.Data
         public async Task<User> Login(string username, string password)
         {
             var user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
-            var role = await context.Roles.FirstOrDefaultAsync(x => x.RoleName == user.Role);
+            var role = await context.Roles.FirstOrDefaultAsync(x => x.RoleName.ToLower() == user.Role);
 
             if (user == null)
                 return null;
@@ -72,6 +73,11 @@ namespace AperoApp.API.Data
             if (await context.Users.AnyAsync(x => x.Username == username))
                 return true;
             return false;
+        }
+
+        public async Task<bool> SaveAll()
+        {
+            return await context.SaveChangesAsync() > 0;
         }
     }
 }

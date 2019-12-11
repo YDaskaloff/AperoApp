@@ -1,17 +1,19 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { map, filter, pairwise } from 'rxjs/operators';
-import { Router, NavigationEnd, RoutesRecognized } from '@angular/router';
+import { Router, RoutesRecognized } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  baseUrl = 'http://localhost:5000/api/admin/auth/';
+  baseUrl = environment.adminUrl + 'auth/';
   private previousUrl: string;
   jwtHelper = new JwtHelperService();
   decodedToken: any;
+  private user: any;
 
   constructor(private http: HttpClient, private router: Router) {
     this.router.events
@@ -25,26 +27,35 @@ export class AuthService {
     return this.previousUrl;
   }
 
+  getCurrentUser() {
+    return this.user;
+  }
+
   login(model: any) {
     return this.http.post(this.baseUrl + 'login', model).pipe(
       map((response: any) => {
-        const user = response;
-        if (user) {
-          localStorage.setItem('token', user.token);
-          this.decodedToken = this.jwtHelper.decodeToken(user.token);
-          console.log(this.decodedToken);
+        this.user = response;
+        if (this.user) {
+          localStorage.setItem('token', this.user.token);
+          this.decodedToken = this.jwtHelper.decodeToken(this.user.token);
         }
       })
     );
   }
-
-
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
-  }
-
+  
   loggedIn() {
     const token = localStorage.getItem('token');
     return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  isAdmin() {
+    if (this.decodedToken.role === 'admin') {
+      return true;
+    }
+    return false;
+  }
+
+  titlecase(name: string) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
   }
 }
