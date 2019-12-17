@@ -13,11 +13,18 @@ import { EditBikesComponent } from './bikes-root/edit-bikes/edit-bikes.component
 import { EditBikeComponent } from './bikes-root/edit-bike/edit-bike.component';
 import { AuthGuard } from './_guards/auth.guard';
 import { AdminGuard } from './_guards/admin.guard';
-
+import { BikeDetailComponent } from './bikes-root/bike-detail/bike-detail.component';
+import { BikeDetailResolver } from './_resolvers/bike-detail.resolver';
+import { BikeListResolver } from './_resolvers/bike-list.resolver';
+import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
+import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
-    { path: 'bikes', component: BikeListComponent },
+    { path: 'bikes', component: BikeListComponent,
+        resolve: {bikes: BikeListResolver}},
+    { path: 'bikes/:id', component: BikeDetailComponent,
+        resolve: {bike: BikeDetailResolver}},
     { path: 'login', component: LoginComponent },
     { path: 'about', component: AboutComponent },
     { path: 'faq', component: FaqComponent },
@@ -27,8 +34,10 @@ export const appRoutes: Routes = [
         runGuardsAndResolvers: 'always',
         canActivate: [AuthGuard],
         children: [
-            { path: 'edit-bikes', component: EditBikesComponent },
-            { path: 'edit-bike', component: EditBikeComponent },
+            { path: 'edit-bikes', component: EditBikesComponent,
+                resolve: {bikes: EditBikesResolver}},
+            { path: 'edit-bikes/:id', component: EditBikeComponent,
+                resolve: {bike: EditBikeResolver}},
         ]
     },
     {

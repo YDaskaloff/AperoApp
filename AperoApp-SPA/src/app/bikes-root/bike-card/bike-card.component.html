@@ -3,7 +3,7 @@
     <div class="col-sm-5" >
       <div class="card-body">
         <div class="card-img-wrapper">
-          <img class="card-img" src="{{bike.photoUrl}}" alt="{{bike.name}}">
+          <a [routerLink]="['/bikes/', bike.id]"><img class="card-img" src="{{bike.photoUrl}}" alt="{{bike.name}}"></a>
         </div>
       </div>        
     </div>

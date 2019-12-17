@@ -1,0 +1,76 @@
+<div class="container mt-4">
+  <app-slider
+    [photosFromBikeDetailed]="bike.photos"
+    [bikeFromBikeDetailed]="bike"
+  ></app-slider>
+  <div class="bd-example mt-4">
+    <table class="table table-bordered">
+      <colgroup>
+        <col span="1" style="width: 15%;" />
+        <col span="1" style="width: 45%;" />
+        <col span="1" style="width: 40%;" />
+      </colgroup>
+      <thead>
+        <tr>
+          <th class="table-master-header" colspan="2" style="width: 55%;">Specifications:</th>
+          <th class="table-master-header" colspan="1">Description:</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th>Name:</th>
+          <td>{{ bike.name | titlecase }}</td>
+          <td rowspan="0">{{ bike.description | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Brand:</th>
+          <td>{{ bike.brand | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Model:</th>
+          <td>{{ bike.model | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Wheel size:</th>
+          <td>{{ bike.wheelSize }}"</td>
+        </tr>
+        <tr>
+          <th>Weight:</th>
+          <td>{{ bike.weight }} kg</td>
+        </tr>
+        <tr>
+          <th>Color:</th>
+          <td>{{ bike.color | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Suitable for:</th>
+          <td>{{ bike.sex }}</td>
+        </tr>
+        <tr>
+          <th>Number of gears:</th>
+          <td>{{ bike.gears }}</td>
+        </tr>
+        <tr>
+          <th>Type of gears:</th>
+          <td>{{ bike.gearType | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Type of breaks:</th>
+          <td>{{ bike.breakType | titlecase }}</td>
+        </tr>
+        <tr>
+          <th>Recommended minimum biker height:</th>
+          <td>{{ bike.bikerHeight }}</td>
+        </tr>
+        <tr>
+          <th>Luggage rack:</th>
+          <td>{{ bike.luggageRack }}</td>
+        </tr>
+        <tr>
+          <th>Basket:</th>
+          <td>{{ bike.basket}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

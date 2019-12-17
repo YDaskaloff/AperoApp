@@ -19,5 +19,26 @@
       "Description": "A black bike",
       "IsMain": 1,
       "BikeId": 3
+    },
+    {
+      "Id": 4,
+      "Url": "https://res.cloudinary.com/dnxuhi8wr/image/upload/v1576145196/AperoApp/A101_04-min_t0vvra.jpg",
+      "Description": "A black bike",
+      "IsMain": 0,
+      "BikeId": 1
+    },
+    {
+      "Id": 5,
+      "Url": "https://res.cloudinary.com/dnxuhi8wr/image/upload/v1576145197/AperoApp/A101_03-min_anjs9z.jpg",
+      "Description": "A black bike",
+      "IsMain": 0,
+      "BikeId": 1
+    },
+    {
+      "Id": 6,
+      "Url": "https://res.cloudinary.com/dnxuhi8wr/image/upload/v1576145197/AperoApp/A101_02-min_mvybcb.jpg",
+      "Description": "A black bike",
+      "IsMain": 0,
+      "BikeId": 1
     }
    ]

@@ -18,5 +18,6 @@ export interface Bike {
     gearType?: string;
     breakType?: string;
     luggageRack?: boolean;
+    weight?: number;
     photos?: Photo[];
 }

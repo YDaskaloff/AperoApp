@@ -1,0 +1,18 @@
+.nav-item {
+    width: 50%;
+}
+
+.table-master-header {
+    font-size: larger;
+}
+
+.description-header {
+    font-weight: bold;
+    padding: 0 0 10px;
+}
+
+button {
+    width: 100%;
+}
+
+

@@ -17,7 +17,7 @@ export class EditBikesService {
     return this.http.get<Bike[]>(this.baseUrl);
   }
 
-  getBike(id): Observable<Bike> {
+  getBike(id: number): Observable<Bike> {
     return this.http.get<Bike>(this.baseUrl + id);
   }
 

@@ -19,6 +19,4 @@ export class BikeService {
   getBike(id: number): Observable<Bike> {
     return this.http.get<Bike>(this.baseUrl + 'bikes/' + id);
   }
-
-
 }

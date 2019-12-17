@@ -1,0 +1,9 @@
+img {
+    height: 500px;
+    display:block;
+    margin:auto;
+}
+
+ngb-carousel {
+    background-color: #000
+}

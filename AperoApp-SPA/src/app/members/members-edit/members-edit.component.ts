@@ -6,7 +6,6 @@ import { RoleService } from 'src/app/_services/role.service';
 import { Role } from 'src/app/_models/role';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/_services/auth.service';
-import { LoginComponent } from 'src/app/login/login.component';
 
 @Component({
   selector: 'app-members-edit',
@@ -66,6 +65,7 @@ export class MembersEditComponent implements OnInit {
         },
         () => {
           this.router.navigate(['/members']);
+          this.loadUsers();
         }
       );
     });
@@ -75,15 +75,20 @@ export class MembersEditComponent implements OnInit {
     this.alertify.confirm('Think twice, cut once!', () => {
       this.userService.deleteUser(id).subscribe(
         next => {
-          this.alertify.success('Member has been deleted');
+          this.alertify.warning('Member has been deleted');
         },
         error => {
           this.alertify.error(error);
         },
         () => {
           this.router.navigate(['/members']);
+          this.loadUsers();
         }
       );
     });
+  }
+
+  onRegistered(registered: boolean) {
+    this.loadUsers();
   }
 }

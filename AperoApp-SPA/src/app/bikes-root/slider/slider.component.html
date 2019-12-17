@@ -1,0 +1,15 @@
+<div class='container-fluid'>
+ 
+  <div class='col-12'>
+    <ngb-carousel>
+      <ng-template *ngFor="let photo of photosFromBikeDetailed" ngbSlide>
+        <img src="{{photo.url}}" alt="photo.id">
+        <div class="carousel-caption">
+          <h3>{{bike.name | titlecase}}</h3>
+          <p>{{photo.description}}</p>
+        </div>
+      </ng-template>      
+    </ngb-carousel>
+  </div>
+   
+</div>

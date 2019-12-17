@@ -1,9 +1,12 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule } from 'ngx-bootstrap';
+import { BsDropdownModule, SlideComponent } from 'ngx-bootstrap';
+import { JwtModule } from '@auth0/angular-jwt';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgxGalleryModule } from 'ngx-gallery';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -27,6 +30,25 @@ import { EditBikesService } from './_services/editBikes.service';
 import { BikeCardComponent } from './bikes-root/bike-card/bike-card.component';
 import { EditBikesCardComponent } from './bikes-root/edit-bikes-card/edit-bikes-card.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
+import { BikeDetailComponent } from './bikes-root/bike-detail/bike-detail.component';
+import { SliderComponent } from './bikes-root/slider/slider.component';
+import { BikeDetailResolver } from './_resolvers/bike-detail.resolver';
+import { BikeListResolver } from './_resolvers/bike-list.resolver';
+import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
+import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
+import { AdminGuard } from './_guards/admin.guard';
+import { AuthGuard } from './_guards/auth.guard';
+
+export function tokenGetter() {
+  return localStorage.getItem('token');
+}
+
+export class CustomHammerConfig extends HammerGestureConfig  {
+  overrides = {
+      pinch: { enable: false },
+      rotate: { enable: false }
+  };
+}
 
 @NgModule({
   declarations: [
@@ -44,7 +66,9 @@ import { MemberCardComponent } from './members/member-card/member-card.component
     EditBikeComponent,
     BikeCardComponent,
     EditBikesCardComponent,
-    MemberCardComponent
+    MemberCardComponent,
+    BikeDetailComponent,
+    SliderComponent
   ],
   imports: [
     BrowserModule,
@@ -52,13 +76,28 @@ import { MemberCardComponent } from './members/member-card/member-card.component
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter,
+        whitelistedDomains: ['localhost:5000/api/admin'],
+        blacklistedRoutes: ['localhost:5000/api/auth']
+      }
+    }),
+    NgbModule,
+    NgxGalleryModule
   ],
   providers: [
       AuthService,
       BikeService,
       UserService,
       EditBikesService,
+      BikeDetailResolver,
+      BikeListResolver,
+      EditBikeResolver,
+      EditBikesResolver,
+      AdminGuard,
+      AuthGuard,
       {
          provide: HTTP_INTERCEPTORS,
          useClass: ErrorInterceptor,
@@ -68,7 +107,8 @@ import { MemberCardComponent } from './members/member-card/member-card.component
          provide: HTTP_INTERCEPTORS,
          useClass: AuthInterceptorService,
          multi: true
-      }
+      },
+      { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ],
   bootstrap: [AppComponent]
 })

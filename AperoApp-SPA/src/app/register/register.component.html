@@ -1,19 +1,27 @@
-<body class="text-center">
-    <div class="container">
-      <form #registerForm="ngForm" (ngSubmit)="register()">
-        <img class="mt-4 mb-4" src="../../assets/Apero logo.png" alt="Apero" height="150">
-        <h1 class="mb-3 text-primary">Register</h1>
-        <hr>
-
-        <input class="form-control" type="email" name="username" placeholder="Username" required [(ngModel)]="model.username">
-        <input class="form-control mt-2" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
-        <input type="password" class="form-control" id="inputPasswordConfirm" data-match="#inputPassword" data-match-error="Whoops, these don't match" placeholder="Confirm" required>
-        <div class="help-block with-errors"></div>
-        <div class="form-group text-center mt-3">
-            <button class="btn btn-lg btn-success" [disabled]="!registerForm.valid" type="submit">Register</button>
-            <button class="btn btn-lg btn-default" type="button" (click)="cancel()">Cancel</button>
-        </div>  
-      </form>
+  <form class="mb-5" #registerForm="ngForm" (ngSubmit)="register()">
+    <div class="card" style="padding: 40px;">
+      <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h3 class="text-center mb-3">Create a new member</h3>
+            <hr>
+        </div>      
+      </div>
+      <div class="row mb-4">
+        <div class="col-4">
+          <input class="form-control" type="email" name="username" placeholder="Username" required [(ngModel)]="model.username">
+        </div>
+        <div class="col-4">
+          <input class="form-control" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+        </div>
+        <div class="col-4">
+          <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm password"  [(ngModel)]="model.confirmPassword">
+        </div>        
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-success" type="submit" [disabled]="!registerForm.valid" style="width: 100%;"> Create member </button>
+        </div>        
+      </div>      
     </div>    
-  </body>
+  </form>
     

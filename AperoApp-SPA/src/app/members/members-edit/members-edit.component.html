@@ -1,29 +1,29 @@
 <div class="container">
   <form #changeRoleForm="ngForm" (ngSubmit)="changeRole()">
-    <div class="card mt-4">
+    <div class="card mt-4" style="padding: 40px;">
       <div class="row">
-        <div class="col-4"></div>
-        <div class="col-4">
-            <h3 class="text-center mt-3 mb-3">Change a member's role</h3>
+        <div class="col-sm-12 mb-3">
+            <h3 class="text-center mb-3">Change a member's role</h3>
             <hr>
         </div>      
       </div>
-      <div class="row" style="padding-left: 50px; padding-bottom: 20px;">
-        <div class="col-4">
-          <select class="form-control" style="padding-right: 5px;" name="username" required [(ngModel)]="model.username">
+      <div class="row mb-4">
+        <div class="col-6">
+          <select class="form-control" name="username" required [(ngModel)]="model.username">
             <option [ngValue]="undefined" hidden selected>Choose a user...</option>
             <option *ngFor="let user of users" >{{user.username}}</option>
           </select>
         </div>
-        <div class="col-4">
-          <select class="form-control" style="padding-right: 5px;" name="role" required [(ngModel)]="model.role">
+        <div class="col-6">
+          <select class="form-control" name="role" required [(ngModel)]="model.role">
             <option [ngValue]="undefined" hidden selected>Choose a role...</option>
             <option *ngFor="let role of roles">{{role.roleName}}</option>
           </select>
-        </div>
-        <div class="col-1"></div>
-        <div class="col-2">
-          <button class="btn btn-primary" type="submit" [disabled]="!changeRoleForm.valid">Change role</button>
+        </div>              
+      </div>  
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-primary" type="submit" [disabled]="!changeRoleForm.valid" style="width: 100%;">Change role</button>
         </div>
       </div>      
     </div>    
@@ -48,4 +48,5 @@
       </tr>
     </tbody>
   </table> 
+  <app-register (registered)="onRegistered($event)"></app-register>
 </div>

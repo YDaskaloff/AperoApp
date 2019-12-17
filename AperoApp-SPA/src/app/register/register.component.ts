@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
@@ -10,6 +10,7 @@ import { UserService } from '../_services/user.service';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
+  @Output() registered = new EventEmitter<boolean>();
   model: any = {};
   previousUrl: string = this.authService.getPreviousUrl();
 
@@ -24,7 +25,8 @@ export class RegisterComponent implements OnInit {
   register() {
     this.userService.register(this.model).subscribe(() => {
       this.alertify.success('registration successful');
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/members');
+      this.registered.emit(true);
     }, error => {
       this.alertify.error(error);
     });

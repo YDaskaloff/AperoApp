@@ -1,0 +1,20 @@
+.nav-item {
+    width: 50%;
+}
+
+.table-master-header {
+    font-size: larger;
+}
+
+.gallery-container {
+    background-color: #000;
+}
+
+.gallery {
+    margin: 0 auto !important;
+}
+
+/* .ngx-gallery-thumbnail.ngx-gallery-active.ngx-gallery-clickable {
+    width: 200px !important;
+} */
+

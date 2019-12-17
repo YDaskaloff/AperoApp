@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { Bike } from 'src/app/_models/bike';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { EditBikesService } from 'src/app/_services/editBikes.service';
 
 @Component({
@@ -12,21 +12,13 @@ import { EditBikesService } from 'src/app/_services/editBikes.service';
 export class EditBikesComponent implements OnInit {
   bikes: Bike[];
 
-  constructor(private editBikesService: EditBikesService, private alertify: AlertifyService, private router: Router) { }
+  constructor(private editBikesService: EditBikesService, private alertify: AlertifyService,
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.loadBikes();
-  }
-
-  loadBikes() {
-    this.editBikesService.getBikes().subscribe(
-      (bikes: Bike[]) => {
-        this.bikes = bikes;
-      },
-      error => {
-        this.alertify.error(error);
-      }
-    );
+    this.route.data.subscribe(data => {
+      this.bikes = data['bikes'];
+    });
   }
 
   deleteBike(id: number) {
@@ -46,6 +38,7 @@ export class EditBikesComponent implements OnInit {
   }
 
   goToEditBike(id: number) {
-    this.router.navigate(['/edit-bike']);
+    this.router.navigate(['/edit-bikes/' + id]);
   }
+
 }
