@@ -1,5 +1,5 @@
 # AperoApp
-A website for browsing through bikes for rent. It offers an admin panel for editing and adding bikes.
+A website for browsing through bikes for rent. It offers an admin panel for editing and adding bikes and members.
 
 This project was meant to fulfill the needs of a voluntary organisation in my local town, whose aim is to provide inexpensive
 bikes and maintenance for students. Unfortunatelly the organisation is soon to be disbanded and so this website will never 
