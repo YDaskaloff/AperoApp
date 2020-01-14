@@ -18,6 +18,7 @@ import { BikeDetailResolver } from './_resolvers/bike-detail.resolver';
 import { BikeListResolver } from './_resolvers/bike-list.resolver';
 import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
 import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -37,7 +38,7 @@ export const appRoutes: Routes = [
             { path: 'edit-bikes', component: EditBikesComponent,
                 resolve: {bikes: EditBikesResolver}},
             { path: 'edit-bikes/:id', component: EditBikeComponent,
-                resolve: {bike: EditBikeResolver}},
+                resolve: {bike: EditBikeResolver}, canDeactivate: [PreventUnsavedChanges]},
         ]
     },
     {

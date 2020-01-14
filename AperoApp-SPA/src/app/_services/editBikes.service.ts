@@ -24,4 +24,8 @@ export class EditBikesService {
   deleteBike(id: number) {
     return this.http.delete(this.baseUrl + id);
   }
+
+  updateBike(id: number, bike: Bike) {
+    return this.http.put(this.baseUrl + id, bike);
+  }
 }

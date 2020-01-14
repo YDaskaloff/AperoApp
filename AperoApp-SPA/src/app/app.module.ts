@@ -38,6 +38,7 @@ import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
 import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
+import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -98,6 +99,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       EditBikesResolver,
       AdminGuard,
       AuthGuard,
+      PreventUnsavedChanges,
       {
          provide: HTTP_INTERCEPTORS,
          useClass: ErrorInterceptor,

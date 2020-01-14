@@ -1,8 +1,11 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AperoApp.API.Data;
 using AperoApp.API.Dtos;
 using AperoApp.API.Helpers;
+using AperoApp.API.Models;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 
@@ -41,6 +44,19 @@ namespace AperoApp.API.Controllers
             var bikeToReturn = mapper.Map<BikeForDetailedDto>(bike);
 
             return Ok(bikeToReturn);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBike(int id, BikeForUpdateDto bikeForUpdateDto)
+        {
+            var bikeFromRepo = await bikeRepo.GetBike(id);
+
+            mapper.Map(bikeForUpdateDto, bikeFromRepo);
+
+            if (await bikeRepo.SaveAll())
+                return NoContent();
+            
+            throw new Exception($"Updating bike {id} failed on save");
         }
 
         [HttpDelete("{id}")]

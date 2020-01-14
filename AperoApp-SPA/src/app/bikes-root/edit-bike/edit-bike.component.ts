@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Bike } from 'src/app/_models/bike';
 import { AlertifyService } from 'src/app/_services/alertify.service';
 import { NgForm } from '@angular/forms';
+import { EditBikesService } from 'src/app/_services/editBikes.service';
 
 @Component({
   selector: 'app-edit-bike',
@@ -11,7 +12,7 @@ import { NgForm } from '@angular/forms';
 })
 export class EditBikeComponent implements OnInit {
   @ViewChild('bikeEditForm', {static: true}) bikeEditForm: NgForm;
-    bike: Bike;
+  bike: Bike;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
@@ -20,7 +21,8 @@ export class EditBikeComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService) { }
+  constructor(private route: ActivatedRoute, private alertify: AlertifyService, 
+              private editBikesService: EditBikesService) { }
 
   ngOnInit() {
     this.route.data.subscribe(data => {
@@ -29,8 +31,11 @@ export class EditBikeComponent implements OnInit {
   }
 
   updateBike() {
-    console.log(this.bike);
-    this.alertify.success('Bike updated successfully');
-    this.bikeEditForm.reset(this.bike);
+    this.editBikesService.updateBike(this.bike.id, this.bike).subscribe(next => {
+      this.alertify.success('Bike updated successfully');
+      this.bikeEditForm.reset(this.bike);
+    }, error => {
+      this.alertify.error(error);
+    });
   }
 }
