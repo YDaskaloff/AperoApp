@@ -3,10 +3,11 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BsDropdownModule, SlideComponent } from 'ngx-bootstrap';
+import { BsDropdownModule, TabsModule } from 'ngx-bootstrap';
 import { JwtModule } from '@auth0/angular-jwt';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
+import { FileUploadModule } from 'ng2-file-upload';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -28,7 +29,6 @@ import { UserService } from './_services/user.service';
 import { BikeService } from './_services/bike.service';
 import { EditBikesService } from './_services/editBikes.service';
 import { BikeCardComponent } from './bikes-root/bike-card/bike-card.component';
-import { EditBikesCardComponent } from './bikes-root/edit-bikes-card/edit-bikes-card.component';
 import { MemberCardComponent } from './members/member-card/member-card.component';
 import { BikeDetailComponent } from './bikes-root/bike-detail/bike-detail.component';
 import { SliderComponent } from './bikes-root/slider/slider.component';
@@ -39,6 +39,7 @@ import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { PhotoEditorComponent } from './bikes-root/photo-editor/photo-editor.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -66,10 +67,10 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     EditBikesComponent,
     EditBikeComponent,
     BikeCardComponent,
-    EditBikesCardComponent,
     MemberCardComponent,
     BikeDetailComponent,
-    SliderComponent
+    SliderComponent,
+    PhotoEditorComponent
   ],
   imports: [
     BrowserModule,
@@ -77,6 +78,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     FormsModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
+    TabsModule.forRoot(),
     ReactiveFormsModule,
     JwtModule.forRoot({
       config: {
@@ -86,7 +88,8 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       }
     }),
     NgbModule,
-    NgxGalleryModule
+    NgxGalleryModule,
+    FileUploadModule
   ],
   providers: [
       AuthService,

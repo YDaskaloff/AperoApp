@@ -64,8 +64,8 @@ namespace AperoApp.API.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Weight")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("Weight")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("WheelSize")
                         .HasColumnType("INTEGER");
@@ -89,6 +89,9 @@ namespace AperoApp.API.Migrations
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");

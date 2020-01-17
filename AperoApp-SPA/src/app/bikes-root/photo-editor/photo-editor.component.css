@@ -1,0 +1,55 @@
+.photo-container {
+    height: 200px;
+    padding: 5px;
+    margin: 0 10px 2px 10px;
+    border: solid rgba(82, 82, 82, 0.329) 1px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.photo-container:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.main-container {
+    height: 200px;
+    padding: 5px;
+    margin: 0 10px 2px 10px;
+    border: solid rgba(20, 221, 70, 0.794) 2px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.main-container:before {
+    content: '';
+    height: 100%;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+img.pics {
+    position: relative;
+    margin: auto;
+    max-height: 100%;
+    max-width: 100%;
+    margin-bottom: 2px;
+    border-radius: 5px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.nv-file-over {
+    border: dotted 3px red;
+}
+
+input[type=file] {
+    color: transparent;
+}
+
+
+
+
+

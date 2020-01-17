@@ -40,5 +40,4 @@ export class EditBikesComponent implements OnInit {
   goToEditBike(id: number) {
     this.router.navigate(['/edit-bikes/' + id]);
   }
-
 }

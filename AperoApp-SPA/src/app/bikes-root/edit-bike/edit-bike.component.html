@@ -1,94 +1,105 @@
 <div class="container">
-  <div class="bd-example mt-4">
-    <form #bikeEditForm="ngForm" (ngSubmit)="updateBike()">
-      <div class="alert alert-info" *ngIf="bikeEditForm.dirty">
-        <strong>Information: </strong> You have made changes. Any unsaved changes will be lost.
-      </div>
-      <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mb-4" type="submit">Save changes</button>
-      <table class="table table-bordered">
-        <colgroup>
-          <col span="1" style="width: 15%;" />
-          <col span="1" style="width: 15%;" />
-          <col span="1" style="width: 30%;" />
-          <col span="1" style="width: 40%;" />
-        </colgroup>
-        <thead>
-          <tr>
-            <th class="table-master-header" colspan="3" style="width: 55%;">Specifications:</th>
-            <th class="table-master-header" colspan="1">Description:</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th>Name:</th>
-            <td>{{ bike.name | titlecase }}</td>
-            <td><input class="form-control" type="text" name="name" [(ngModel)]="bike.name" placeholder="{{bike.name}}"></td>
-            <th> Current description: </th>
-          </tr>
-          <tr>
-            <th>Brand:</th>
-            <td>{{bike.brand | titlecase}}</td>
-            <td><input class="form-control" type="text" name="brand" [(ngModel)]="bike.brand" placeholder="{{bike.brand}}"></td>
-            <td rowspan="0">{{bike.description}} <hr> <textarea class="form-control" name="description" [(ngModel)]="bike.description" type="text" rows="20" placeholder="update description here"></textarea></td>
-          </tr>
-          <tr>
-            <th>Model:</th>
-            <td>{{ bike.model | titlecase }}</td>
-            <td><input class="form-control" type="text" name="model" [(ngModel)]="bike.model" placeholder="{{bike.model}}"></td>
-          </tr>
-          <tr>
-            <th>Wheel size:</th>
-            <td>{{ bike.wheelSize }}"</td>
-            <td><input class="form-control" type="number" name="wheelSize" [(ngModel)]="bike.wheelSize" placeholder='{{bike.wheelSize}}'></td>
-          </tr>
-          <tr>
-            <th>Weight:</th>
-            <td>{{ bike.weight }} kg</td>
-            <td><input class="form-control" type="number" step="0.01" name="weight" [(ngModel)]="bike.weight" placeholder="{{bike.weight}}"></td>
-          </tr>
-          <tr>
-            <th>Color:</th>
-            <td>{{ bike.color | titlecase }}</td>
-            <td><input class="form-control" type="text" name="color" [(ngModel)]="bike.color" placeholder="{{bike.color}}"></td>
-          </tr>
-          <tr>
-            <th>Suitable for:</th>
-            <td>{{ bike.sex }}</td>
-            <td><input class="form-control" type="text" name="sex" [(ngModel)]="bike.sex" placeholder="{{bike.sex}}"></td>
-          </tr>
-          <tr>
-            <th>Number of gears:</th>
-            <td>{{ bike.gears }}</td>
-            <td><input class="form-control" type="number" name="gears" [(ngModel)]="bike.gears" placeholder="{{bike.gears}}"></td>
-          </tr>
-          <tr>
-            <th>Type of gears:</th>
-            <td>{{ bike.gearType | titlecase }}</td>
-            <td><input class="form-control" type="text" name="gearType" [(ngModel)]="bike.gearType" placeholder="{{bike.gearType}}"></td>
-          </tr>
-          <tr>
-            <th>Type of breaks:</th>
-            <td>{{ bike.breakType | titlecase }}</td>
-            <td><input class="form-control" type="text" name="breakType" [(ngModel)]="bike.breakType" placeholder="{{bike.breakType}}"></td>
-          </tr>
-          <tr>
-            <th>Recommended minimum biker height:</th>
-            <td>{{ bike.bikerHeight }}</td>
-            <td><input class="form-control" type="number" name="bikerHeight" [(ngModel)]="bike.bikerHeight" placeholder="{{bike.bikerHeight}}"></td>
-          </tr>
-          <tr>
-            <th>Luggage rack:</th>
-            <td>{{ bike.luggageRack }}</td>
-            <td><input class="form-control" type="text" name="luggageRack" [(ngModel)]="bike.luggageRack" placeholder="{{bike.luggageRack}}"></td>
-          </tr>
-          <tr>
-            <th>Basket:</th>
-            <td>{{ bike.basket}}</td>
-            <td><input class="form-control" type="text" name="basket" [(ngModel)]="bike.basket" placeholder="{{bike.basket}}"></td>
-          </tr>        
-        </tbody> 
-      </table>
-      <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mt-1 mb-3" type="submit">Save changes</button>
-    </form>
+  <div class="col-sm-12">
+    <div class="tab-panel mt-3">
+      <tabset class="bike-tabset" [justified]="true">
+        <tab heading="Edit Info">
+          <div class="bd-example mt-4">
+            <form #bikeEditForm="ngForm" (ngSubmit)="updateBike()">
+              <div class="alert alert-info" *ngIf="bikeEditForm.dirty">
+                <strong>Information: </strong> You have made changes. Any unsaved changes will be lost.
+              </div>
+              <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mb-4" type="submit">Save changes</button>
+              <table class="table table-bordered">
+                <colgroup>
+                  <col span="1" style="width: 15%;" />
+                  <col span="1" style="width: 15%;" />
+                  <col span="1" style="width: 30%;" />
+                  <col span="1" style="width: 40%;" />
+                </colgroup>
+                <thead>
+                  <tr>
+                    <th class="table-master-header" colspan="3" style="width: 55%;">Specifications:</th>
+                    <th class="table-master-header" colspan="1">Description:</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th>Name:</th>
+                    <td>{{ bike.name | titlecase }}</td>
+                    <td><input class="form-control" type="text" name="name" [(ngModel)]="bike.name" placeholder="{{bike.name}}"></td>
+                    <th> Current description: </th>
+                  </tr>
+                  <tr>
+                    <th>Brand:</th>
+                    <td>{{bike.brand | titlecase}}</td>
+                    <td><input class="form-control" type="text" name="brand" [(ngModel)]="bike.brand" placeholder="{{bike.brand}}"></td>
+                    <td rowspan="0">{{bike.description}} <hr> <textarea class="form-control" name="description" [(ngModel)]="bike.description" type="text" rows="20" placeholder="update description here"></textarea></td>
+                  </tr>
+                  <tr>
+                    <th>Model:</th>
+                    <td>{{ bike.model | titlecase }}</td>
+                    <td><input class="form-control" type="text" name="model" [(ngModel)]="bike.model" placeholder="{{bike.model}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Wheel size:</th>
+                    <td>{{ bike.wheelSize }}"</td>
+                    <td><input class="form-control" type="number" name="wheelSize" [(ngModel)]="bike.wheelSize" placeholder='{{bike.wheelSize}}'></td>
+                  </tr>
+                  <tr>
+                    <th>Weight:</th>
+                    <td>{{ bike.weight }} kg</td>
+                    <td><input class="form-control" type="number" step="0.01" name="weight" [(ngModel)]="bike.weight" placeholder="{{bike.weight}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Color:</th>
+                    <td>{{ bike.color | titlecase }}</td>
+                    <td><input class="form-control" type="text" name="color" [(ngModel)]="bike.color" placeholder="{{bike.color}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Suitable for:</th>
+                    <td>{{ bike.sex }}</td>
+                    <td><input class="form-control" type="text" name="sex" [(ngModel)]="bike.sex" placeholder="{{bike.sex}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Number of gears:</th>
+                    <td>{{ bike.gears }}</td>
+                    <td><input class="form-control" type="number" name="gears" [(ngModel)]="bike.gears" placeholder="{{bike.gears}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Type of gears:</th>
+                    <td>{{ bike.gearType | titlecase }}</td>
+                    <td><input class="form-control" type="text" name="gearType" [(ngModel)]="bike.gearType" placeholder="{{bike.gearType}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Type of breaks:</th>
+                    <td>{{ bike.breakType | titlecase }}</td>
+                    <td><input class="form-control" type="text" name="breakType" [(ngModel)]="bike.breakType" placeholder="{{bike.breakType}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Recommended minimum biker height:</th>
+                    <td>{{ bike.bikerHeight }}</td>
+                    <td><input class="form-control" type="number" name="bikerHeight" [(ngModel)]="bike.bikerHeight" placeholder="{{bike.bikerHeight}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Luggage rack:</th>
+                    <td>{{ bike.luggageRack }}</td>
+                    <td><input class="form-control" type="text" name="luggageRack" [(ngModel)]="bike.luggageRack" placeholder="{{bike.luggageRack}}"></td>
+                  </tr>
+                  <tr>
+                    <th>Basket:</th>
+                    <td>{{ bike.basket}}</td>
+                    <td><input class="form-control" type="text" name="basket" [(ngModel)]="bike.basket" placeholder="{{bike.basket}}"></td>
+                  </tr>        
+                </tbody> 
+              </table>
+              <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mt-1 mb-3" type="submit">Save changes</button>
+            </form>
+          </div>
+        </tab>
+        <tab heading="Edit Photos">
+          <app-photo-editor [photos]="bike.photos"></app-photo-editor>
+        </tab>
+      </tabset>
+    </div>
   </div>
 </div>

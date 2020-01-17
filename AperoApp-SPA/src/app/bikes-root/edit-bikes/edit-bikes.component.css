@@ -1,3 +1,22 @@
 img {
-    width: 100px;
+    height: 66.666667px;
+}
+
+th {
+    vertical-align: middle;
+}
+
+td {
+    vertical-align: middle;
+}
+
+.button-container {
+    text-align: center;
+    vertical-align: middle;
+}
+
+button.btn {
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
 }

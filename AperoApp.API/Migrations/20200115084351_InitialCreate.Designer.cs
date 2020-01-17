@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AperoApp.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20191204184110_BikesUsersRoles")]
-    partial class BikesUsersRoles
+    [Migration("20200115084351_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -66,8 +66,8 @@ namespace AperoApp.API.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("Weight")
-                        .HasColumnType("INTEGER");
+                    b.Property<float>("Weight")
+                        .HasColumnType("REAL");
 
                     b.Property<int>("WheelSize")
                         .HasColumnType("INTEGER");
@@ -91,6 +91,9 @@ namespace AperoApp.API.Migrations
 
                     b.Property<bool>("IsMain")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("PublicId")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Url")
                         .HasColumnType("TEXT");

@@ -11,5 +11,7 @@ namespace AperoApp.API.Data
          Task<bool> SaveAll();
          Task<IEnumerable<Bike>> GetBikes();
          Task<Bike> GetBike(int id);
+         Task<Photo> GetPhoto(int id);
+         Task<Photo> GetMainPhotoForBike(int id);
     }
 }

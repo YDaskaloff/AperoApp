@@ -21,6 +21,8 @@ namespace AperoApp.API.Helpers
                     opt.MapFrom(src => src.Photos.FirstOrDefault(p => p.IsMain).Url));
             CreateMap<Photo, PhotoForDetailedDto>();       
             CreateMap<BikeForUpdateDto, Bike>();
+            CreateMap<Photo, PhotoForReturnDto>();
+            CreateMap<PhotoForCreationDto, Photo>();
         }
     }
 }
