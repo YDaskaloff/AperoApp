@@ -10,29 +10,39 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AperoApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [AuthorizeRoles(Roles.Admin)]
     [Route("api/[controller]")]
     [ApiController]
     public class AdminController : ControllerBase
     {
-        private readonly IUserRepository userRepo;
-        private readonly IMapper mapper;
-        private readonly IAuthRepository authRepo;
-        private readonly IRoleRepository roleRepo;
-        public AdminController(IAuthRepository _authRepo, IUserRepository _userRepo, IRoleRepository _roleRepo, IMapper _mapper)
+        private readonly IUserRepository _userRepo;
+        private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepo;
+        private readonly IRoleRepository _roleRepo;
+        public AdminController(IAuthRepository authRepo, IUserRepository userRepo, IRoleRepository roleRepo, IMapper mapper)
         {
-            roleRepo = _roleRepo;
-            authRepo = _authRepo;
-            userRepo = _userRepo;
-            mapper = _mapper;
+            _roleRepo = roleRepo;
+            _authRepo = authRepo;
+            _userRepo = userRepo;
+            _mapper = mapper;
         }
+        [HttpGet("{id}", Name = "GetUser")]
+        public async Task<IActionResult> GetUser(int id)
+        {
+            var user = await _userRepo.GetUser(id);
+
+            var userToReturn = _mapper.Map<UserForListDto>(user);
+
+            return Ok(userToReturn);
+        }  
 
         [HttpGet("members")]
         public async Task<IActionResult> GetUsers()
         {
-            var users = await userRepo.GetUsers();
+            var users = await _userRepo.GetUsers();
 
-            var usersToReturn = mapper.Map<IEnumerable<UserForListDto>>(users);
+            var usersToReturn = _mapper.Map<IEnumerable<UserForListDto>>(users);
 
             return Ok(usersToReturn);
         }
@@ -42,32 +52,31 @@ namespace AperoApp.API.Controllers
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            if (await authRepo.UserExists(userForRegisterDto.Username))
+            if (await _authRepo.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
 
-            var userToCreate = new User
-            {
-                Username = userForRegisterDto.Username
-            };
+            var userToCreate = _mapper.Map<User>(userForRegisterDto);
 
-            var createdUser = await authRepo.Register(userToCreate, userForRegisterDto.Password);
+            var createdUser = await _authRepo.Register(userToCreate, userForRegisterDto.Password);
 
-            return StatusCode(201);
+            var userToReturn = _mapper.Map<UserForListDto>(createdUser);
+
+            return CreatedAtRoute("GetUser", new {controller = "Admin", id = createdUser.Id}, userToReturn);
         }
 
         [HttpPost("changerole")]
         public async Task<IActionResult> ChangeRole(UserForLoginDto userForLoginDto)
         {
-            if (!await authRepo.UserExists(userForLoginDto.Username))
+            if (!await _authRepo.UserExists(userForLoginDto.Username))
                 return BadRequest("User doesn't exist");
 
-            if (await userRepo.GetRole(userForLoginDto.Username) == userForLoginDto.Role)
+            if (await _userRepo.GetRole(userForLoginDto.Username) == userForLoginDto.Role)
                 return BadRequest(userForLoginDto.Username + " is already " + userForLoginDto.Role);
             
-            if (userForLoginDto.Role == Roles.Moderator && (await userRepo.AdminsCount()) == 1)
+            if (userForLoginDto.Role == Roles.Moderator && (await _userRepo.AdminsCount()) == 1)
                 return BadRequest("At least one admin needed");
 
-            var changedRole = await userRepo.ChangeRole(userForLoginDto.Username, userForLoginDto.Role);
+            var changedRole = await _userRepo.ChangeRole(userForLoginDto.Username, userForLoginDto.Role);
 
             if (!changedRole)
                 return BadRequest("That didn't work");
@@ -78,7 +87,7 @@ namespace AperoApp.API.Controllers
         [HttpGet("roles")]
         public async Task<IActionResult> GetRoles()
         {
-            var roles = await roleRepo.GetRoles();
+            var roles = await _roleRepo.GetRoles();
 
             return Ok(roles);
         }
@@ -86,13 +95,13 @@ namespace AperoApp.API.Controllers
         [HttpDelete("deletemember/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await userRepo.GetUser(id);
+            var user = await _userRepo.GetUser(id);
             if (user.Role == Roles.Admin)
                 return BadRequest("Can't delete an admin");
 
-            userRepo.Delete(user);
+            _userRepo.Delete(user);
 
-            if (!await authRepo.SaveAll())
+            if (!await _authRepo.SaveAll())
                 return BadRequest("That didn't work");
 
             return StatusCode(201);

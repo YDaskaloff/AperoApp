@@ -20,3 +20,7 @@ button.btn {
     display: inline-block;
     vertical-align: middle;
 }
+
+button.create {
+    width: 100%;
+}

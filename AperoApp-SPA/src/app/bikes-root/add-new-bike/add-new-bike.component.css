@@ -14,17 +14,3 @@
 button {
     width: 100%;
 }
-
-th {
-    vertical-align: middle;
-}
-
-td {
-    vertical-align: middle;
-}
-
-td.curDescription {
-    vertical-align: top;
-}
-
-

@@ -16,6 +16,10 @@ export class EditBikesComponent implements OnInit {
               private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getBikes();
+  }
+
+  private getBikes() {
     this.route.data.subscribe(data => {
       this.bikes = data['bikes'];
     });
@@ -26,11 +30,13 @@ export class EditBikesComponent implements OnInit {
       this.editBikesService.deleteBike(id).subscribe(
         next => {
           this.alertify.success('Bike has been deleted');
+          this.getBikes();
         },
         error => {
           this.alertify.error(error);
         },
         () => {
+          this.bikes.splice(this.bikes.findIndex(b => b.id === id), 1);
           this.router.navigate(['/edit-bikes']);
         }
       );

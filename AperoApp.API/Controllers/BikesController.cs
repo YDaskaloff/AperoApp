@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AperoApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [AllowAnonymous]
     [Route("api/[controller]")]
     [ApiController]

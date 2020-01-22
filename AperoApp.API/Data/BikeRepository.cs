@@ -15,7 +15,14 @@ namespace AperoApp.API.Data
         }
         public void Add<T>(T entity) where T : class
         {
-            _context.Add(entity);
+            _context.AddAsync(entity);
+        }
+
+        public async Task<bool> BikeExists(string bikeName)
+        {
+            if (await _context.Bikes.AnyAsync(x => x.Name == bikeName))
+                return true;
+            return false;
         }
 
         public void Delete<T>(T entity) where T : class

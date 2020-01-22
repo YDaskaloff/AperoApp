@@ -3,7 +3,9 @@
     <div class="col-sm-5" >
       <div class="card-body">
         <div class="card-img-wrapper">
-          <a [routerLink]="['/bikes/', bike.id]"><img class="card-img" src="{{bike.photoUrl}}" alt="{{bike.name}}"></a>
+          <a [routerLink]="['/bikes/', bike.id]"><img class="card-img" 
+            src="{{bike.photoUrl || '../../../../../assets/Apero logo.png'}}" alt="{{bike.name}}">
+          </a>
         </div>
       </div>        
     </div>

@@ -38,4 +38,8 @@ export class EditBikesService {
   deletePhoto(bikeId: number, id: number) {
     return this.http.delete(this.baseUrl + bikeId + '/photos/' + id);
   }
+
+  addNewBike(model: any) {
+    return this.http.post(this.baseUrl + 'add-bike', model);
+  }
 }

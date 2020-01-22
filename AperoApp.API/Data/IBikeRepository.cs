@@ -13,5 +13,7 @@ namespace AperoApp.API.Data
          Task<Bike> GetBike(int id);
          Task<Photo> GetPhoto(int id);
          Task<Photo> GetMainPhotoForBike(int id);
+        Task<bool> BikeExists(string bikeName);
+
     }
 }

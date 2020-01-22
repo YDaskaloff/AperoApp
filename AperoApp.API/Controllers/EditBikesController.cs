@@ -11,27 +11,28 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace AperoApp.API.Controllers
 {
+    [ServiceFilter(typeof(LogUserActivity))]
     [AuthorizeRoles(Roles.Admin, Roles.Moderator)]
     [Route("api/admin/[controller]")]
     [ApiController]
     public class Edit_bikesController : ControllerBase
     {
-        private readonly IBikeRepository bikeRepo;
-        private readonly IMapper mapper;
-        private readonly IAuthRepository authRepo;
-        public Edit_bikesController(IBikeRepository _bikeRepo, IAuthRepository _authRepo, IMapper _mapper)
+        private readonly IBikeRepository _bikeRepo;
+        private readonly IMapper _mapper;
+        private readonly IAuthRepository _authRepo;
+        public Edit_bikesController(IBikeRepository bikeRepo, IAuthRepository authRepo, IMapper mapper)
         {
-            authRepo = _authRepo;
-            bikeRepo = _bikeRepo;
-            mapper = _mapper;
+            _authRepo = authRepo;
+            _bikeRepo = bikeRepo;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetBikesForEdit()
         {
-            var bikes = await bikeRepo.GetBikes();
+            var bikes = await _bikeRepo.GetBikes();
 
-            var bikesToReturn = mapper.Map<IEnumerable<BikeForEditListDto>>(bikes);
+            var bikesToReturn = _mapper.Map<IEnumerable<BikeForEditListDto>>(bikes);
 
             return Ok(bikesToReturn);
         }
@@ -39,9 +40,9 @@ namespace AperoApp.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetBike(int id)
         {
-            var bike = await bikeRepo.GetBike(id);
+            var bike = await _bikeRepo.GetBike(id);
 
-            var bikeToReturn = mapper.Map<BikeForDetailedDto>(bike);
+            var bikeToReturn = _mapper.Map<BikeForDetailedDto>(bike);
 
             return Ok(bikeToReturn);
         }
@@ -49,24 +50,47 @@ namespace AperoApp.API.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBike(int id, BikeForUpdateDto bikeForUpdateDto)
         {
-            var bikeFromRepo = await bikeRepo.GetBike(id);
+            var bikeFromRepo = await _bikeRepo.GetBike(id);
 
-            mapper.Map(bikeForUpdateDto, bikeFromRepo);
+            _mapper.Map(bikeForUpdateDto, bikeFromRepo);
 
-            if (await bikeRepo.SaveAll())
+            if (await _bikeRepo.SaveAll())
                 return NoContent();
             
             throw new Exception($"Updating bike {id} failed on save");
         }
 
+        [HttpPost("{add-bike}")]
+        public async Task<IActionResult> AddBike(BikeForUpdateDto bikeToAdd)
+        {
+            if (bikeToAdd.Name != null)
+                bikeToAdd.Name = bikeToAdd.Name.ToLower();
+
+            if (await _bikeRepo.BikeExists(bikeToAdd.Name))
+                return BadRequest("A bike with that name already exists");
+
+            var bikeToCreate = _mapper.Map<Bike>(bikeToAdd);
+            bikeToCreate.DateAdded = DateTime.Now;
+
+            _bikeRepo.Add(bikeToCreate);
+
+            if (!await _bikeRepo.SaveAll())
+                return BadRequest("That didn't work");
+
+            if (_bikeRepo.GetBike(bikeToCreate.Id) == null)
+                return BadRequest("That didn't work");
+
+            return StatusCode(201);
+        }
+
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteBike(int id)
         {
-            var bike = await bikeRepo.GetBike(id);
+            var bike = await _bikeRepo.GetBike(id);
 
-            bikeRepo.Delete(bike);
+            _bikeRepo.Delete(bike);
 
-            if (!await authRepo.SaveAll())
+            if (!await _bikeRepo.SaveAll())
                 return BadRequest("That didn't work");
 
             return StatusCode(201);

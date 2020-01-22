@@ -12,5 +12,6 @@ namespace AperoApp.API.Data
          Task<bool> ChangeRole(string username, string roleName);
          Task<string> GetRole(string username);
          Task<int> AdminsCount();
+         Task<bool> SaveAll();
     }
 }

@@ -55,6 +55,7 @@ export class MembersEditComponent implements OnInit {
   }
 
   changeRole() {
+    this.model.username = this.model.username.toLowerCase();
     this.alertify.confirm('Think twice, cut once!', () => {
       this.userService.changeRole(this.model).subscribe(
         next => {

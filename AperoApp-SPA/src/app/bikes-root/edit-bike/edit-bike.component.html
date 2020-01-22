@@ -33,7 +33,7 @@
                     <th>Brand:</th>
                     <td>{{bike.brand | titlecase}}</td>
                     <td><input class="form-control" type="text" name="brand" [(ngModel)]="bike.brand" placeholder="{{bike.brand}}"></td>
-                    <td rowspan="0">{{bike.description}} <hr> <textarea class="form-control" name="description" [(ngModel)]="bike.description" type="text" rows="20" placeholder="update description here"></textarea></td>
+                    <td class="curDescription" rowspan="0">{{bike.description}} <hr> <textarea class="form-control" name="description" [(ngModel)]="bike.description" type="text" rows="20" placeholder="update description here"></textarea></td>
                   </tr>
                   <tr>
                     <th>Model:</th>

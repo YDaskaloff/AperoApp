@@ -23,6 +23,7 @@ namespace AperoApp.API.Helpers
             CreateMap<BikeForUpdateDto, Bike>();
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
+            CreateMap<UserForRegisterDto, User>();
         }
     }
 }

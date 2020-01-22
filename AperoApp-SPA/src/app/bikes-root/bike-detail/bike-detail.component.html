@@ -1,8 +1,9 @@
 <div class="container mt-4">
   <app-slider
-    [photosFromBikeDetailed]="bike.photos"
+    [photosFromBikeDetailed]="bike.photos || '../../../../../assets/Apero logo.png'"
     [bikeFromBikeDetailed]="bike"
-  ></app-slider>
+  >
+  </app-slider>
   <div class="bd-example mt-4">
     <table class="table table-bordered">
       <colgroup>

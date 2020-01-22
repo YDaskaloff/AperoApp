@@ -21,7 +21,7 @@ export class EditBikeComponent implements OnInit {
     }
   }
 
-  constructor(private route: ActivatedRoute, private alertify: AlertifyService, 
+  constructor(private route: ActivatedRoute, private alertify: AlertifyService,
               private editBikesService: EditBikesService) { }
 
   ngOnInit() {

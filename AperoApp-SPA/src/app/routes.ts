@@ -19,6 +19,8 @@ import { BikeListResolver } from './_resolvers/bike-list.resolver';
 import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
 import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
+import { AddNewBikeComponent } from './bikes-root/add-new-bike/add-new-bike.component';
+import { PreventUnsavedChanges1 } from './_guards/prevent-unsaved-changes1.guard';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -36,9 +38,10 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard],
         children: [
             { path: 'edit-bikes', component: EditBikesComponent,
-                resolve: {bikes: EditBikesResolver}},
+                resolve: {bikes: EditBikesResolver} },
             { path: 'edit-bikes/:id', component: EditBikeComponent,
-                resolve: {bike: EditBikeResolver}, canDeactivate: [PreventUnsavedChanges]},
+                resolve: {bike: EditBikeResolver}, canDeactivate: [PreventUnsavedChanges] },
+            { path: 'add-new-bike', component: AddNewBikeComponent, canDeactivate: [PreventUnsavedChanges1] }
         ]
     },
     {

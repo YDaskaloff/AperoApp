@@ -1,5 +1,5 @@
-  <form class="mb-5" #registerForm="ngForm" (ngSubmit)="register()">
-    <div class="card" style="padding: 40px;">
+  <form class="mb-5" [formGroup]="registerForm" (ngSubmit)="register()">
+    <div class="card mt-4" style="padding: 40px;">
       <div class="row">
         <div class="col-sm-12 mb-3">
             <h3 class="text-center mb-3">Create a new member</h3>
@@ -8,13 +8,54 @@
       </div>
       <div class="row mb-4">
         <div class="col-4">
-          <input class="form-control" type="email" name="username" placeholder="Username" required [(ngModel)]="model.username">
+          <input type="text"
+            [ngClass]="{'is-invalid': registerForm.get('username').errors 
+              && registerForm.get('username').touched}"
+            class="form-control" 
+            formControlName="username" 
+            placeholder="Username">
+          <div class="invalid-feedback">Please choose a username</div>
         </div>
         <div class="col-4">
-          <input class="form-control" type="password" name="password" placeholder="Password" required [(ngModel)]="model.password">
+          <input class="form-control" type="password" 
+            [ngClass]="{'is-invalid': registerForm.get('password').errors 
+              && registerForm.get('password').touched}"
+            formControlName="password" 
+            placeholder="Password">
+          <div class="invalid-feedback" 
+            *ngIf="registerForm.get('password').hasError('required') 
+              && registerForm.get('password').touched">
+            Password is required
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="registerForm.get('password').hasError('minlength') 
+              && registerForm.get('password').touched">
+            Password must be at least 7 characters
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="registerForm.get('password').hasError('maxlength') 
+              && registerForm.get('password').touched">
+            Password cannot exceed 16 characters
+          </div>
         </div>
         <div class="col-4">
-          <input class="form-control" type="password" name="confirmPassword" placeholder="Confirm password"  [(ngModel)]="model.confirmPassword">
+          <input class="form-control" 
+            [ngClass]="{'is-invalid': registerForm.get('confirmPassword').errors 
+              && registerForm.get('confirmPassword').touched
+              || registerForm.get('confirmPassword').touched
+              && registerForm.hasError('mismatch')}"
+            type="password" formControlName="confirmPassword" 
+            placeholder="Confirm password">
+            <div class="invalid-feedback" 
+              *ngIf="registerForm.get('confirmPassword').hasError('required') 
+                && registerForm.get('confirmPassword').touched">
+              Field is required
+            </div>
+            <div class="invalid-feedback" 
+              *ngIf="registerForm.hasError('mismatch') 
+                && registerForm.get('confirmPassword').touched">
+              Passwords must match
+            </div>
         </div>        
       </div>
       <div class="row">

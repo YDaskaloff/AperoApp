@@ -8,6 +8,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryModule } from 'ngx-gallery';
 import { FileUploadModule } from 'ng2-file-upload';
+import {TimeAgoPipe} from 'time-ago-pipe';
 
 import { AppComponent } from './app.component';
 import { NavComponent } from './nav/nav.component';
@@ -40,6 +41,8 @@ import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './bikes-root/photo-editor/photo-editor.component';
+import { AddNewBikeComponent } from './bikes-root/add-new-bike/add-new-bike.component';
+import { PreventUnsavedChanges1 } from './_guards/prevent-unsaved-changes1.guard';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -70,12 +73,15 @@ export class CustomHammerConfig extends HammerGestureConfig  {
     MemberCardComponent,
     BikeDetailComponent,
     SliderComponent,
-    PhotoEditorComponent
+    PhotoEditorComponent,
+    AddNewBikeComponent,
+    TimeAgoPipe
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(appRoutes),
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
@@ -103,6 +109,7 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       AdminGuard,
       AuthGuard,
       PreventUnsavedChanges,
+      PreventUnsavedChanges1,
       {
          provide: HTTP_INTERCEPTORS,
          useClass: ErrorInterceptor,

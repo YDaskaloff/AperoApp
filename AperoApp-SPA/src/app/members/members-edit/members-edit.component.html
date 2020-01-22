@@ -1,52 +1,61 @@
 <div class="container">
-  <form #changeRoleForm="ngForm" (ngSubmit)="changeRole()">
-    <div class="card mt-4" style="padding: 40px;">
-      <div class="row">
-        <div class="col-sm-12 mb-3">
-            <h3 class="text-center mb-3">Change a member's role</h3>
-            <hr>
-        </div>      
-      </div>
-      <div class="row mb-4">
-        <div class="col-6">
-          <select class="form-control" name="username" required [(ngModel)]="model.username">
-            <option [ngValue]="undefined" hidden selected>Choose a user...</option>
-            <option *ngFor="let user of users" >{{user.username}}</option>
-          </select>
-        </div>
-        <div class="col-6">
-          <select class="form-control" name="role" required [(ngModel)]="model.role">
-            <option [ngValue]="undefined" hidden selected>Choose a role...</option>
-            <option *ngFor="let role of roles">{{role.roleName}}</option>
-          </select>
-        </div>              
-      </div>  
-      <div class="row">
-        <div class="col-sm-12">
-          <button class="btn btn-primary" type="submit" [disabled]="!changeRoleForm.valid" style="width: 100%;">Change role</button>
-        </div>
-      </div>      
-    </div>    
-  </form>
-
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th scope="col">#</th>
-        <th scope="col">Member:</th>
-        <th scope="col">Role:</th>
-        <th scope="col">Last active:</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let user of users">
-        <th scope="row">{{user.id}}</th>
-        <td>{{user.username | titlecase}}</td>
-        <td>{{user.role}}</td>
-        <td>{{user.lastActive | date}}</td>
-        <td><button class="btn btn-danger" type="button" (click)="deleteUser(user.id)">Delete</button></td>
-      </tr>
-    </tbody>
-  </table> 
-  <app-register (registered)="onRegistered($event)"></app-register>
+  <div class="col-sm-12">
+    <div class="tab-panel mt-3">
+      <tabset class="bike-tabset" [justified]="true">
+        <tab heading="Edit Members">
+          <form #changeRoleForm="ngForm" (ngSubmit)="changeRole()">
+            <div class="card mt-4" style="padding: 40px;">
+              <div class="row">
+                <div class="col-sm-12 mb-3">
+                    <h3 class="text-center mb-3">Change a member's role</h3>
+                    <hr>
+                </div>      
+              </div>
+              <div class="row mb-4">
+                <div class="col-6">
+                  <select class="form-control" name="username" required [(ngModel)]="model.username">
+                    <option [ngValue]="undefined" hidden selected>Choose a user...</option>
+                    <option *ngFor="let user of users" >{{user.username | titlecase}}</option>
+                  </select>
+                </div>
+                <div class="col-6">
+                  <select class="form-control" name="role" required [(ngModel)]="model.role">
+                    <option [ngValue]="undefined" hidden selected>Choose a role...</option>
+                    <option *ngFor="let role of roles">{{role.roleName}}</option>
+                  </select>
+                </div>              
+              </div>  
+              <div class="row">
+                <div class="col-sm-12">
+                  <button class="btn btn-primary" type="submit" [disabled]="!changeRoleForm.valid" style="width: 100%;">Change role</button>
+                </div>
+              </div>      
+            </div>    
+          </form>
+          <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Member:</th>
+                <th scope="col">Role:</th>
+                <th scope="col">Last active:</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of users">
+                <th scope="row">{{user.id}}</th>
+                <td>{{user.username | titlecase}}</td>
+                <td>{{user.role}}</td>
+                <td>{{user.lastActive | timeAgo}}</td>
+                <td><button class="btn btn-danger" type="button" (click)="deleteUser(user.id)">Delete</button></td>
+              </tr>
+            </tbody>
+          </table> 
+        </tab>
+        <tab heading="Add New Member">
+          <app-register (registered)="onRegistered($event)"></app-register>
+        </tab>
+      </tabset>
+    </div>
+  </div>
 </div>

@@ -18,8 +18,8 @@ export class UserService {
     return this.http.get<User[]>(this.baseUrl + 'members');
   }
 
-  register(model: any) {
-    return this.http.post(this.baseUrl + 'register', model);
+  register(user: User) {
+    return this.http.post(this.baseUrl + 'register', user);
   }
 
   changeRole(model: any) {

@@ -3,6 +3,8 @@ import { AuthService } from '../_services/auth.service';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../_services/alertify.service';
 import { UserService } from '../_services/user.service';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { User } from '../_models/user';
 
 @Component({
   selector: 'app-register',
@@ -11,25 +13,43 @@ import { UserService } from '../_services/user.service';
 })
 export class RegisterComponent implements OnInit {
   @Output() registered = new EventEmitter<boolean>();
-  model: any = {};
+  user: User;
   previousUrl: string = this.authService.getPreviousUrl();
+  registerForm: FormGroup;
 
   constructor(private userService: UserService,
               private authService: AuthService,
               private router: Router,
-              private alertify: AlertifyService) { }
+              private alertify: AlertifyService,
+              private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.createRegisterForm();
+  }
+
+  createRegisterForm() {
+    this.registerForm = this.fb.group({
+      username: ['', Validators.required],
+      password: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(16)]],
+      confirmPassword: ['', Validators.required]
+    }, {validator: this.passwordMatchValidator});
+  }
+
+  passwordMatchValidator(g: FormGroup) {
+    return g.get('password').value === g.get('confirmPassword').value ? null : {mismatch: true};
   }
 
   register() {
-    this.userService.register(this.model).subscribe(() => {
-      this.alertify.success('registration successful');
-      this.router.navigateByUrl('/members');
-      this.registered.emit(true);
-    }, error => {
-      this.alertify.error(error);
-    });
+    if (this.registerForm.valid) {
+      this.user = Object.assign({}, this.registerForm.value);
+      this.userService.register(this.user).subscribe(() => {
+        this.alertify.success('Registration successful');
+      }, error => {
+        this.alertify.error(error);
+      }, () => {
+        this.router.navigate(['/members']);
+      });
+    }
   }
 
   cancel() {
