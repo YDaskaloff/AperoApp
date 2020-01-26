@@ -16,6 +16,7 @@ export class RegisterComponent implements OnInit {
   user: User;
   previousUrl: string = this.authService.getPreviousUrl();
   registerForm: FormGroup;
+  emailPattern = '[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$';
 
   constructor(private userService: UserService,
               private authService: AuthService,
@@ -29,6 +30,7 @@ export class RegisterComponent implements OnInit {
 
   createRegisterForm() {
     this.registerForm = this.fb.group({
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
       username: ['', Validators.required],
       password: ['', [Validators.required, Validators.minLength(7), Validators.maxLength(16)]],
       confirmPassword: ['', Validators.required]
@@ -44,6 +46,8 @@ export class RegisterComponent implements OnInit {
       this.user = Object.assign({}, this.registerForm.value);
       this.userService.register(this.user).subscribe(() => {
         this.alertify.success('Registration successful');
+        this.registerForm.reset();
+        this.registered.emit(true);
       }, error => {
         this.alertify.error(error);
       }, () => {

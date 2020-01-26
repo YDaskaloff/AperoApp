@@ -38,14 +38,16 @@
                 <th scope="col">#</th>
                 <th scope="col">Member:</th>
                 <th scope="col">Role:</th>
-                <th scope="col">Last active:</th>
+                <th scope="col">Email:</th>
+                <th colspan="2">Last active:</th>
               </tr>
             </thead>
             <tbody>
               <tr *ngFor="let user of users">
-                <th scope="row">{{user.id}}</th>
+                <th scope="row">{{users.indexOf(user) + 1}}</th>
                 <td>{{user.username | titlecase}}</td>
                 <td>{{user.role}}</td>
+                <td>{{user.email}}</td>
                 <td>{{user.lastActive | timeAgo}}</td>
                 <td><button class="btn btn-danger" type="button" (click)="deleteUser(user.id)">Delete</button></td>
               </tr>

@@ -11,12 +11,12 @@ import { EditBikesService } from 'src/app/_services/editBikes.service';
   styleUrls: ['./edit-bike.component.css']
 })
 export class EditBikeComponent implements OnInit {
-  @ViewChild('bikeEditForm', {static: true}) bikeEditForm: NgForm;
+  @ViewChild('editForm', {static: true}) editForm: NgForm;
   bike: Bike;
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-    if (this.bikeEditForm.dirty) {
+    if (this.editForm.dirty) {
       $event.returnValue = true;
     }
   }
@@ -33,7 +33,7 @@ export class EditBikeComponent implements OnInit {
   updateBike() {
     this.editBikesService.updateBike(this.bike.id, this.bike).subscribe(next => {
       this.alertify.success('Bike updated successfully');
-      this.bikeEditForm.reset(this.bike);
+      this.editForm.reset(this.bike);
     }, error => {
       this.alertify.error(error);
     });

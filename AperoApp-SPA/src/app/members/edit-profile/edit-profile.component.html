@@ -1,0 +1,72 @@
+<div class="container">
+  <form class="mb-5" [formGroup]="editForm" (ngSubmit)="updateUser()">
+    <div class="card mt-4" style="padding: 40px;">
+      <div class="row">
+        <div class="col-sm-12 mb-3">
+            <h3 class="text-center mb-3">Update your profile</h3>
+            <hr>
+        </div>      
+      </div>
+      <div class="row mb-4">
+        <div class="col-3">
+          <input type="email"
+            [ngClass]="{'is-invalid': editForm.get('email').errors && editForm.get('email').touched}"
+            class="form-control" 
+            formControlName="email" 
+            placeholder="Email">
+          <div class="invalid-feedback" 
+            *ngIf="editForm.get('email').hasError('pattern') 
+              && editForm.get('email').touched">
+            Email is invalid
+          </div>
+        </div>
+        <div class="col-3">
+          <input type="text"
+            class="form-control" 
+            formControlName="username" 
+            placeholder="Username">
+        </div>
+        <div class="col-3">
+          <input class="form-control" type="password" 
+            [ngClass]="{'is-invalid': editForm.get('password').errors 
+              && editForm.get('password').touched}"
+            formControlName="password" 
+            placeholder="Password">
+          <div class="invalid-feedback" 
+            *ngIf="editForm.get('password').hasError('minlength') 
+              && editForm.get('password').touched">
+            Password must be at least 7 characters
+          </div>
+          <div class="invalid-feedback" 
+            *ngIf="editForm.get('password').hasError('maxlength') 
+              && editForm.get('password').touched">
+            Password cannot exceed 16 characters
+          </div>
+        </div>
+        <div class="col-3">
+          <input class="form-control" 
+            [ngClass]="{'is-invalid': 
+              editForm.get('confirmPassword').touched
+              && editForm.hasError('mismatch')}"
+            type="password" formControlName="confirmPassword" 
+            placeholder="Confirm password">
+            <div class="invalid-feedback" 
+              *ngIf="editForm.hasError('mismatch') 
+                && editForm.get('confirmPassword').touched">
+              Passwords must match
+            </div>
+        </div>        
+      </div>
+      <div class="row">
+        <div class="col-sm-12">
+          <button class="btn btn-success" type="submit" [disabled]="!editForm.valid || !checkValid()" style="width: 100%;"> Save Changes </button>
+        </div>        
+      </div>      
+    </div>    
+  </form>  
+  <p>value: {{editForm.value | json}}</p>
+  <p>status: {{editForm.status | json}}</p>
+</div>
+
+  
+  

@@ -22,5 +22,9 @@
 
 .dropdown-item:hover, .dropdown-item:focus {
     color: #fff !important;
-  }
+}
+
+i {
+    margin-right: 5px;
+}
   

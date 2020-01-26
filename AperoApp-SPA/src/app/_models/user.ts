@@ -4,4 +4,5 @@ export interface User {
     created: Date;
     lastActive: Date;
     role: string;
+    email: string;
 }

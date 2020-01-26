@@ -40,7 +40,6 @@ export class MembersEditComponent implements OnInit {
         this.alertify.error(error);
       }
     );
-    console.log();
   }
 
   loadRoles() {

@@ -1,7 +1,7 @@
-<div class="container">
-  <div class="col">
-    <div *ngFor="let bike of bikes" >
+<div class="container mb-4">
+  <div class="row">
+    <div class="col-sm-4" *ngFor="let bike of bikes" >
       <app-bike-card [bike]="bike"></app-bike-card>
     </div>
-  </div>
+  </div>  
 </div>

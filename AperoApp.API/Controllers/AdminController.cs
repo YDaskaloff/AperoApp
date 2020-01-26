@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AperoApp.API.Data;
 using AperoApp.API.Dtos;
@@ -27,6 +29,8 @@ namespace AperoApp.API.Controllers
             _userRepo = userRepo;
             _mapper = mapper;
         }
+
+        [AuthorizeRoles(Roles.Admin, Roles.Moderator)]
         [HttpGet("{id}", Name = "GetUser")]
         public async Task<IActionResult> GetUser(int id)
         {
@@ -67,6 +71,8 @@ namespace AperoApp.API.Controllers
         [HttpPost("changerole")]
         public async Task<IActionResult> ChangeRole(UserForLoginDto userForLoginDto)
         {
+            userForLoginDto.Username.ToLower();
+            
             if (!await _authRepo.UserExists(userForLoginDto.Username))
                 return BadRequest("User doesn't exist");
 
@@ -92,7 +98,7 @@ namespace AperoApp.API.Controllers
             return Ok(roles);
         }
 
-        [HttpDelete("deletemember/{id}")]
+        [HttpDelete("members/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
             var user = await _userRepo.GetUser(id);
@@ -106,5 +112,7 @@ namespace AperoApp.API.Controllers
 
             return StatusCode(201);
         }
+
+        
     }
 }

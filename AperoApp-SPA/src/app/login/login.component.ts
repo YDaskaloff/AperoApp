@@ -10,7 +10,6 @@ import { AlertifyService } from '../_services/alertify.service';
 })
 export class LoginComponent implements OnInit {
   model: any = {};
-  previousUrl: string = this.authService.getPreviousUrl();
 
   constructor(private authService: AuthService, private router: Router, private alertify: AlertifyService) { }
 
@@ -23,7 +22,7 @@ export class LoginComponent implements OnInit {
     }, error => {
       this.alertify.error(error);
     }, () => {
-      this.router.navigate(['/members']);
+      this.router.navigate(['/edit-bikes']);
     });
   }
 
@@ -32,7 +31,7 @@ export class LoginComponent implements OnInit {
     this.alertify.message('cancelled');
 
     if (previous && previous !== '/register') {
-      this.router.navigateByUrl(this.previousUrl);
+      this.router.navigateByUrl(previous);
     } else {
       this.router.navigateByUrl('/home');
     }

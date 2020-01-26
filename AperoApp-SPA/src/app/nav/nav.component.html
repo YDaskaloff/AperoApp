@@ -25,16 +25,17 @@
     </div>
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
       <a class="dropdown-toggle text-light" dropdownToggle>
-        Welcome, {{authService.decodedToken.unique_name | titlecase}}
+        Welcome, &nbsp; {{username | titlecase}}
       </a>
       <div class="dropdown-menu mt-3" *dropdownMenu>
-        <a class="dropdown-item" [routerLink]="['/members']"> <i class="fa fa-users"></i> Edit members</a>
+        <a class="dropdown-item" [routerLink]="['/members']" *ngIf="isAdmin()"> <i class="fa fa-users fa-fw"></i> Edit members</a>
+        <div class="dropdown-divider" *ngIf="isAdmin()"></div>
+        <a class="dropdown-item" [routerLink]="['/edit-bikes']"> <i class="fa fa-bicycle fa-fw"></i> Edit bikes</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" [routerLink]="['/edit-bikes']"> <i class="fa fa-bicycle"></i> Edit bikes</a>
+        <a class="dropdown-item" [routerLink]="['/edit-profile']"> <i class="fa fa-user-o fa-fw"></i> Edit profile</a>
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out"></i> Logout</a>
+        <a class="dropdown-item" (click)="logout()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
       </div>
     </div>
-  </div>
-  
+  </div>  
 </nav>

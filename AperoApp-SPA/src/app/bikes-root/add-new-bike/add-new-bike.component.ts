@@ -11,7 +11,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-new-bike.component.css']
 })
 export class AddNewBikeComponent implements OnInit {
-  @ViewChild('addBikeForm', {static: true}) addBikeForm: NgForm;
+  @ViewChild('editForm', {static: true}) editForm: NgForm;
   model: any = {};
   defForm: any = {
     gears: 0,
@@ -24,7 +24,7 @@ export class AddNewBikeComponent implements OnInit {
 
   @HostListener('window:beforeunload', ['$event'])
   unloadNotification($event: any) {
-    if (this.addBikeForm.dirty) {
+    if (this.editForm.dirty) {
       $event.returnValue = true;
     }
   }
@@ -39,7 +39,7 @@ export class AddNewBikeComponent implements OnInit {
     console.log(this.model);
     this.ebService.addNewBike(this.model).subscribe(next => {
       this.alertify.success('Bike created');
-      this.addBikeForm.reset(this.defForm);
+      this.editForm.reset(this.defForm);
     }, error => {
       this.alertify.error(error);
     });

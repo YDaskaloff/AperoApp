@@ -42,7 +42,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { PhotoEditorComponent } from './bikes-root/photo-editor/photo-editor.component';
 import { AddNewBikeComponent } from './bikes-root/add-new-bike/add-new-bike.component';
-import { PreventUnsavedChanges1 } from './_guards/prevent-unsaved-changes1.guard';
+import { EditProfileComponent } from './members/edit-profile/edit-profile.component';
 
 export function tokenGetter() {
   return localStorage.getItem('token');
@@ -56,48 +56,49 @@ export class CustomHammerConfig extends HammerGestureConfig  {
 }
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavComponent,
-    LoginComponent,
-    HomeComponent,
-    BikeListComponent,
-    AboutComponent,
-    FaqComponent,
-    ContactComponent,
-    RegisterComponent,
-    MembersEditComponent,
-    EditBikesComponent,
-    EditBikeComponent,
-    BikeCardComponent,
-    MemberCardComponent,
-    BikeDetailComponent,
-    SliderComponent,
-    PhotoEditorComponent,
-    AddNewBikeComponent,
-    TimeAgoPipe
-  ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    RouterModule.forRoot(appRoutes),
-    BsDropdownModule.forRoot(),
-    TabsModule.forRoot(),
-    ReactiveFormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter,
-        whitelistedDomains: ['localhost:5000/api/admin'],
-        blacklistedRoutes: ['localhost:5000/api/auth']
-      }
-    }),
-    NgbModule,
-    NgxGalleryModule,
-    FileUploadModule
-  ],
-  providers: [
+   declarations: [
+      AppComponent,
+      NavComponent,
+      LoginComponent,
+      HomeComponent,
+      BikeListComponent,
+      AboutComponent,
+      FaqComponent,
+      ContactComponent,
+      RegisterComponent,
+      MembersEditComponent,
+      EditBikesComponent,
+      EditBikeComponent,
+      BikeCardComponent,
+      MemberCardComponent,
+      BikeDetailComponent,
+      SliderComponent,
+      PhotoEditorComponent,
+      AddNewBikeComponent,
+      TimeAgoPipe,
+      EditProfileComponent
+   ],
+   imports: [
+      BrowserModule,
+      HttpClientModule,
+      FormsModule,
+      ReactiveFormsModule,
+      RouterModule.forRoot(appRoutes),
+      BsDropdownModule.forRoot(),
+      TabsModule.forRoot(),
+      ReactiveFormsModule,
+      JwtModule.forRoot({
+         config: {
+           tokenGetter,
+           whitelistedDomains: ['localhost:5000/api/admin'],
+           blacklistedRoutes: ['localhost:5000/api/auth']
+         }
+       }),
+       NgbModule,
+       NgxGalleryModule,
+       FileUploadModule
+     ],
+   providers: [
       AuthService,
       BikeService,
       UserService,
@@ -109,7 +110,6 @@ export class CustomHammerConfig extends HammerGestureConfig  {
       AdminGuard,
       AuthGuard,
       PreventUnsavedChanges,
-      PreventUnsavedChanges1,
       {
          provide: HTTP_INTERCEPTORS,
          useClass: ErrorInterceptor,

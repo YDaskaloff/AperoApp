@@ -8,22 +8,24 @@ namespace AperoApp.API.Data
 {
     public class AuthRepository : IAuthRepository
     {
-        private readonly DataContext context;
-        public AuthRepository(DataContext _context)
+        private readonly DataContext _context;
+        public AuthRepository(DataContext context)
         {
-            context = _context;
+            _context = context;
         }
 
         public async Task<User> Login(string username, string password)
         {
-            var user = await context.Users.FirstOrDefaultAsync(x => x.Username == username);
-            var role = await context.Roles.FirstOrDefaultAsync(x => x.RoleName.ToLower() == user.Role);
+            var user = username.Contains("@") ? await _context.Users.FirstOrDefaultAsync(x => x.Email == username) :
+                                                await _context.Users.FirstOrDefaultAsync(x => x.Username == username);
 
             if (user == null)
                 return null;
             
             if (!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt)) 
                 return null;
+
+            var role = await _context.Roles.FirstOrDefaultAsync(x => x.RoleName.ToLower() == user.Role);
             
             if (role == null)
                 return null;
@@ -53,10 +55,32 @@ namespace AperoApp.API.Data
             user.PasswordHash = passwordHash;
             user.PasswordSalt = passwordSalt;
 
-            await context.Users.AddAsync(user);
-            await context.SaveChangesAsync();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
 
             return user;
+        }
+
+            public async Task<User> UpdateUser(int id, User user, string password)
+        {
+            var userToUpdate = await _context.Users.FirstOrDefaultAsync(u => u.Id == id);
+
+            if (password != "")
+            {
+                byte[] passwordHash, passwordSalt;
+                CreatePasswordHash(password, out passwordHash, out passwordSalt); 
+
+                userToUpdate.PasswordHash = passwordHash;
+                userToUpdate.PasswordSalt = passwordSalt;
+            }
+              
+            if (user.Email != "")
+                userToUpdate.Email = user.Email;
+            
+            if (user.Username != "")
+                userToUpdate.Username = user.Username.ToLower();            
+
+            return userToUpdate;
         }
 
         private void CreatePasswordHash(string password, out byte[] passwordHash, out byte[] passwordSalt)
@@ -68,16 +92,22 @@ namespace AperoApp.API.Data
             }            
         }
 
-        public async Task<bool> UserExists(string username)
+        public async Task<bool> UserExists(string creds)
         {
-            if (await context.Users.AnyAsync(x => x.Username == username))
+            if (creds.Contains("@")) 
+            {
+                if (await _context.Users.AnyAsync(x => x.Email == creds))
+                    return true;
+            }
+            
+            if (await _context.Users.AnyAsync(x => x.Username == creds))
                 return true;
             return false;
         }
 
         public async Task<bool> SaveAll()
         {
-            return await context.SaveChangesAsync() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }

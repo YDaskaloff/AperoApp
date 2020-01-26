@@ -24,6 +24,8 @@ namespace AperoApp.API.Helpers
             CreateMap<Photo, PhotoForReturnDto>();
             CreateMap<PhotoForCreationDto, Photo>();
             CreateMap<UserForRegisterDto, User>();
+            CreateMap<UserForUpdateDto, User>();
+            CreateMap<User, UserForLocalDto>();
         }
     }
 }

@@ -1,9 +1,9 @@
 <div class="container">
-  <form class="mt-4" #addBikeForm="ngForm" (ngSubmit)="addNewBike()">
-    <div class="alert alert-info" *ngIf="addBikeForm.dirty">
+  <form class="mt-4" #editForm="ngForm" (ngSubmit)="addNewBike()">
+    <div class="alert alert-info" *ngIf="editForm.dirty">
       <strong>Information: </strong> You have made changes. Any unsaved changes will be lost.
     </div>
-    <button [disabled]="!addBikeForm.valid" class="btn btn-success mb-4" type="submit">Create New Bike</button>
+    <button [disabled]="!editForm.valid" class="btn btn-success mb-4" type="submit">Create New Bike</button>
     <table class="table table-bordered">
       <colgroup>
         <col span="1" style="width: 15%;" />
@@ -19,7 +19,7 @@
       <tbody>
         <tr>
           <th>Name:</th>
-          <td><input class="form-control" type="text" name="name" [(ngModel)]="model.name" placeholder="Name"></td>
+          <td><input class="form-control" type="text" name="name"  [(ngModel)]="model.name" placeholder="Name"></td>
           <td rowspan="0">
             <textarea class="form-control" name="description" [(ngModel)]="model.description" 
               type="text" rows="20" placeholder="Description">
@@ -36,7 +36,7 @@
         </tr>
         <tr>
           <th>Wheel size:</th>
-          <td><input class="form-control" type="number" name="wheelSize" [(ngModel)]="model.wheelSize" placeholder='0'></td>
+          <td><input class="form-control" type="number" name="wheelSize"  [(ngModel)]="model.wheelSize" placeholder='0'></td>
         </tr>
         <tr>
           <th>Weight:</th>
@@ -76,6 +76,6 @@
         </tr>        
       </tbody> 
     </table>
-    <button [disabled]="!addBikeForm.valid" class="btn btn-success mt-1 mb-3" type="submit">Create New Bike</button>
+    <button [disabled]="!editForm.valid" class="btn btn-success mt-1 mb-3" type="submit">Create New Bike</button>
   </form>
 </div>

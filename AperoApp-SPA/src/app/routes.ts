@@ -20,7 +20,7 @@ import { EditBikesResolver } from './_resolvers/edit-bikes.resolver';
 import { EditBikeResolver } from './_resolvers/edit-bike.resolver';
 import { PreventUnsavedChanges } from './_guards/prevent-unsaved-changes.guard';
 import { AddNewBikeComponent } from './bikes-root/add-new-bike/add-new-bike.component';
-import { PreventUnsavedChanges1 } from './_guards/prevent-unsaved-changes1.guard';
+import { EditProfileComponent } from './members/edit-profile/edit-profile.component';
 
 export const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -41,7 +41,8 @@ export const appRoutes: Routes = [
                 resolve: {bikes: EditBikesResolver} },
             { path: 'edit-bikes/:id', component: EditBikeComponent,
                 resolve: {bike: EditBikeResolver}, canDeactivate: [PreventUnsavedChanges] },
-            { path: 'add-new-bike', component: AddNewBikeComponent, canDeactivate: [PreventUnsavedChanges1] }
+            { path: 'add-new-bike', component: AddNewBikeComponent, canDeactivate: [PreventUnsavedChanges] },
+            { path: 'edit-profile', component: EditProfileComponent }
         ]
     },
     {

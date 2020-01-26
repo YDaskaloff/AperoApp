@@ -4,11 +4,11 @@
       <tabset class="bike-tabset" [justified]="true">
         <tab heading="Edit Info">
           <div class="bd-example mt-4">
-            <form #bikeEditForm="ngForm" (ngSubmit)="updateBike()">
-              <div class="alert alert-info" *ngIf="bikeEditForm.dirty">
+            <form #editForm="ngForm" (ngSubmit)="updateBike()">
+              <div class="alert alert-info" *ngIf="editForm.dirty">
                 <strong>Information: </strong> You have made changes. Any unsaved changes will be lost.
               </div>
-              <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mb-4" type="submit">Save changes</button>
+              <button [disabled]="!editForm.dirty" class="btn btn-success mb-4" type="submit">Save changes</button>
               <table class="table table-bordered">
                 <colgroup>
                   <col span="1" style="width: 15%;" />
@@ -92,7 +92,7 @@
                   </tr>        
                 </tbody> 
               </table>
-              <button [disabled]="!bikeEditForm.dirty" class="btn btn-success mt-1 mb-3" type="submit">Save changes</button>
+              <button [disabled]="!editForm.dirty" class="btn btn-success mt-1 mb-3" type="submit">Save changes</button>
             </form>
           </div>
         </tab>
