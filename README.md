@@ -18,5 +18,3 @@ https://www.udemy.com/course/build-an-app-with-aspnet-core-and-angular-from-scra
 
 After going halfway though with the course, I decided to try and create something of my own with the purpose of better
 understanding the contents of the lectures. Watching the tutorials was very educational but nothing teaches better than practice.
-
-This project isn't dead yet. It is on pause now, because I am diverting my attention towards other technologies.
