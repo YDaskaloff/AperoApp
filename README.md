@@ -1,4 +1,7 @@
 # AperoApp
+Presentation of the more fundamental functionality:
+https://www.youtube.com/watch?v=wrFBsuiK80I
+
 A website for browsing through bikes for rent. It offers an admin panel for editing and adding bikes and members.
 
 This project was meant to fulfill the needs of a voluntary organisation in my local town, whose aim is to provide inexpensive
